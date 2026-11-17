@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#100e13">
-  <meta name="description" content="Chicken Archer — официальный сайт игры. Играй в актуальную версию 3.0, следи за обновлениями и поддерживай разработчика.">
-  <meta property="og:title" content="Chicken Archer — официальный сайт">
-  <meta property="og:description" content="Прицелься. Выстрели. Победи. Узнай о последней версии Chicken Archer и найди все ссылки проекта в одном месте.">
+  <meta name="description" content="Официальный сайт проектов Chicken Archer и FLAME: версии, трейлеры, обновления и ссылки на загрузку.">
+  <meta property="og:title" content="Chicken Archer & FLAME — официальный сайт проектов">
+  <meta property="og:description" content="Два независимых проекта в одном месте: Chicken Archer и FLAME. Новости, версии и ссылки на загрузку.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="trailer_poster.jpg">
   <meta name="color-scheme" content="dark light">
-  <title>Chicken Archer — официальный сайт</title>
+  <title>Chicken Archer & FLAME — официальные проекты</title>
   <style>
     :root {
       color-scheme: dark;
@@ -298,9 +298,221 @@
     .behind-copy p { margin:12px 0 0; color:var(--muted); font-size:.91rem; line-height:1.8; }
     .mascot-bubble.rare { border-color:rgba(255,207,104,.72); box-shadow:0 14px 40px rgba(0,0,0,.32),0 0 24px rgba(255,207,104,.13); }
     @media (max-width: 680px) { .behind-grid { grid-template-columns:1fr; } .behind-card { padding:18px; } .behind-copy { padding-left:0; } }
+
+    /* Full project-site refresh and FLAME palette transition. */
+    @property --site-accent { syntax: "<color>"; inherits: true; initial-value: #ffd078; }
+    @property --site-secondary { syntax: "<color>"; inherits: true; initial-value: #ff8750; }
+    .palette-backdrop {
+      position:fixed; inset:0; z-index:-1; pointer-events:none;
+      background:
+        radial-gradient(ellipse at 82% 5%,rgba(255,129,68,.18),transparent 34rem),
+        radial-gradient(ellipse at 12% 34%,rgba(255,192,91,.10),transparent 32rem),
+        linear-gradient(145deg,#100e14,#0c0d13 65%,#111019);
+      transition:background .9s ease,filter .9s ease;
+    }
+    html { background:#100e14; }
+    body {
+      isolation:isolate; position:relative; background:transparent;
+      --site-accent:#ffd078; --site-secondary:#ff8750;
+      --gold:var(--site-accent); --orange:var(--site-secondary);
+      --line:rgba(255,210,160,.17); transition:color .7s ease;
+    }
+    body[data-project="flame"] { --site-accent:#ff784f; --site-secondary:#ffb34b; --line:rgba(255,116,72,.2); }
+    body[data-project="flame"] .palette-backdrop {
+      background:
+        radial-gradient(ellipse at 82% 5%,rgba(255,77,38,.25),transparent 34rem),
+        radial-gradient(ellipse at 12% 34%,rgba(255,151,55,.12),transparent 32rem),
+        linear-gradient(145deg,#100b0d,#100d13 65%,#170d0c);
+    }
+    body[data-theme="light"] .palette-backdrop {
+      background:
+        radial-gradient(ellipse at 82% 5%,rgba(255,143,73,.12),transparent 34rem),
+        radial-gradient(ellipse at 12% 34%,rgba(255,203,119,.16),transparent 32rem),
+        linear-gradient(145deg,#fbf6ef,#f2ece5 65%,#fff8ef);
+    }
+    body[data-theme="light"][data-project="flame"] .palette-backdrop {
+      background:
+        radial-gradient(ellipse at 82% 5%,rgba(255,102,62,.13),transparent 34rem),
+        radial-gradient(ellipse at 12% 34%,rgba(255,180,77,.16),transparent 32rem),
+        linear-gradient(145deg,#fcf2ec,#f6eee9 65%,#fff8ef);
+    }
+    .topbar { background:rgba(13,12,18,.76); border-bottom-color:rgba(255,255,255,.09); box-shadow:0 10px 38px rgba(0,0,0,.12); }
+    body[data-theme="light"] .topbar { background:rgba(250,246,240,.82); }
+    .nav { min-height:84px; }
+    .brand-mark { filter:drop-shadow(0 0 20px rgba(255,153,78,.26)); }
+    .nav-links { gap:10px; }
+    .nav-links > a:not(.nav-cta):not(.project-tab) { padding:9px 10px; border-radius:10px; transition:background .2s,color .2s; }
+    .nav-links > a:not(.nav-cta):not(.project-tab):hover { background:rgba(255,255,255,.055); }
+    .project-tab {
+      display:inline-flex; align-items:center; min-height:37px; padding:8px 11px;
+      border:1px solid rgba(255,255,255,.12); border-radius:11px;
+      color:var(--text); background:rgba(255,255,255,.035);
+      font-size:.7rem; font-weight:950; letter-spacing:.07em; white-space:nowrap;
+      transition:color .35s,background .35s,border-color .35s,transform .2s;
+    }
+    .project-tab:hover { transform:translateY(-2px); border-color:var(--site-accent); }
+    .project-tab.chicken-tab { border-color:rgba(255,202,110,.27); }
+    .project-tab.flame-tab { border-color:rgba(255,116,72,.28); }
+    body[data-project="chicken"] .chicken-tab, body[data-project="flame"] .flame-tab {
+      color:#21130d; border-color:transparent; background:linear-gradient(125deg,var(--site-accent),var(--site-secondary));
+    }
+    .hero { min-height:660px; padding-top:92px; padding-bottom:88px; gap:clamp(28px,5vw,72px); }
+    .eyebrow { backdrop-filter:blur(10px); }
+    h1 { font-size:clamp(3.6rem,7.5vw,7.1rem); }
+    .hero-copy { max-width:610px; }
+    .art-panel { border-radius:34px; box-shadow:0 35px 100px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.08); }
+    .ticker { border-color:rgba(255,255,255,.08); background:rgba(255,255,255,.025); }
+    section { padding:clamp(68px,8vw,104px) 0; }
+    .section-head { margin-bottom:34px; }
+    .kicker { color:var(--site-secondary); }
+    h2 { letter-spacing:-.06em; }
+    .panel {
+      border-color:rgba(255,255,255,.095); border-radius:26px;
+      background:linear-gradient(145deg,rgba(33,29,38,.84),rgba(18,17,25,.9));
+      box-shadow:0 22px 70px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.035);
+      backdrop-filter:blur(16px);
+    }
+    .game-card,.about-card,.social-card,.version-card,.behind-card {
+      transition:transform .28s,border-color .28s,box-shadow .28s;
+    }
+    .game-card:hover,.about-card:hover,.social-card:hover,.version-card:hover,.behind-card:hover {
+      transform:translateY(-5px); border-color:color-mix(in srgb,var(--site-accent) 48%,transparent);
+      box-shadow:0 28px 70px rgba(0,0,0,.22);
+    }
+    .button { border-radius:13px; }
+    .button-primary,.nav-cta { background:linear-gradient(130deg,var(--site-accent),var(--site-secondary)); }
+    .latest { border-color:rgba(255,206,137,.17); }
+    .latest::after { color:color-mix(in srgb,var(--site-accent) 8%,transparent); }
+    .trailer-shell { border-radius:27px; }
+    .trailer-frame { border-radius:19px; }
+    .trailer-frame video { border-radius:18px; }
+    .feature-row { border-color:rgba(255,255,255,.075); border-radius:16px; }
+    .social-card { border-radius:17px; }
+    .mascot-button { backdrop-filter:blur(12px); }
+    .footer-row { padding-top:8px; }
+    .footnote { line-height:1.7; }
+
+    .flame-section {
+      position:relative; isolation:isolate; overflow:hidden; padding:clamp(75px,9vw,118px) 0;
+      border-top:1px solid rgba(255,119,73,.22); border-bottom:1px solid rgba(255,119,73,.16);
+      background:linear-gradient(180deg,rgba(18,11,13,.42),rgba(13,10,13,.76)); color:#fff3eb;
+    }
+    .flame-section::before {
+      content:""; position:absolute; z-index:-1; inset:0;
+      background:radial-gradient(ellipse at 80% 8%,rgba(255,80,43,.19),transparent 36rem),radial-gradient(ellipse at 8% 65%,rgba(255,154,58,.10),transparent 33rem),linear-gradient(130deg,rgba(13,10,13,.94),rgba(20,13,15,.88));
+      pointer-events:none;
+    }
+    .flame-topline { display:flex; align-items:center; gap:13px; margin-bottom:24px; }
+    .flame-mark {
+      display:grid; place-items:center; width:45px; height:45px;
+      border:1px solid rgba(255,126,76,.34); border-radius:14px;
+      background:linear-gradient(145deg,rgba(255,119,65,.17),rgba(255,178,72,.07));
+      box-shadow:0 0 32px rgba(255,94,48,.12); font-size:1.4rem;
+    }
+    .flame-overline { color:#ff956a; font-size:.7rem; font-weight:950; letter-spacing:.2em; }
+    .flame-hero { display:grid; grid-template-columns:1.1fr .9fr; align-items:center; gap:35px; }
+    .flame-status {
+      display:inline-flex; align-items:center; gap:9px; padding:8px 12px;
+      border:1px solid rgba(255,129,82,.28); border-radius:999px;
+      background:rgba(255,112,64,.07); color:#ffb18d; font-size:.7rem; font-weight:950; letter-spacing:.15em;
+    }
+    .flame-status i,.current-tag i { display:inline-block; width:7px; height:7px; border-radius:50%; background:#ff865b; box-shadow:0 0 0 5px rgba(255,120,73,.12); }
+    .flame-title { margin:20px 0 17px; color:#fff5ed; font-size:clamp(4.4rem,10vw,8.4rem); font-weight:1000; line-height:.83; letter-spacing:-.09em; text-shadow:0 10px 55px rgba(255,87,47,.18); }
+    .flame-title span { color:#ff784f; }
+    .flame-lead { max-width:620px; margin:0; color:#c7b8b3; font-size:1.05rem; line-height:1.85; }
+    .flame-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:25px; }
+    .flame-button {
+      display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:49px; padding:12px 18px;
+      border:1px solid rgba(255,255,255,.13); border-radius:13px; color:#fff5ed; font-weight:900;
+      transition:transform .2s,filter .2s,border-color .2s;
+    }
+    .flame-button:hover { transform:translateY(-3px); filter:brightness(1.08); }
+    .flame-button-primary { color:#26120d; border-color:transparent; background:linear-gradient(125deg,#ff9b63,#ff653f 58%,#e74738); box-shadow:0 12px 35px rgba(255,83,47,.19); }
+    .flame-button-ghost { background:rgba(255,255,255,.035); }
+    .flame-caption { margin:13px 0 0; color:#93827e; font-size:.78rem; line-height:1.6; }
+    .flame-visual { position:relative; display:grid; place-items:center; min-height:340px; isolation:isolate; }
+    .flame-visual::before { content:""; position:absolute; width:64%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle,rgba(255,91,48,.2),rgba(255,91,48,.055) 48%,transparent 70%); filter:blur(5px); z-index:-1; }
+    .flame-orbit { position:absolute; width:76%; aspect-ratio:1; border:1px solid rgba(255,139,83,.23); border-radius:50%; }
+    .orbit-one { transform:rotate(-27deg) scaleY(.62); border-style:dashed; }
+    .orbit-two { width:59%; border-color:rgba(255,183,103,.2); transform:rotate(30deg) scaleY(.7); }
+    .flame-core {
+      display:grid; place-items:center; width:180px; aspect-ratio:1; border-radius:46px;
+      border:1px solid rgba(255,168,105,.38); background:radial-gradient(circle at 35% 25%,#49231c,#1d1115 66%,#100c12);
+      box-shadow:0 25px 65px rgba(0,0,0,.4),0 0 55px rgba(255,90,48,.17),inset 0 1px rgba(255,255,255,.12); transform:rotate(-8deg);
+    }
+    .flame-core span { color:#ff9b62; font-size:8rem; font-weight:1000; line-height:1; letter-spacing:-.12em; transform:rotate(8deg); text-shadow:0 0 35px rgba(255,82,45,.35); }
+    .flame-spark { position:absolute; color:#ffac70; font-size:1.8rem; text-shadow:0 0 25px rgba(255,96,55,.7); }
+    .spark-one { top:20%; right:17%; } .spark-two { bottom:18%; left:18%; }
+    .flame-visual-label { position:absolute; bottom:2%; color:#8b7169; font-size:.62rem; font-weight:900; letter-spacing:.27em; }
+    .flame-feature-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:52px; }
+    .flame-feature {
+      display:flex; gap:14px; align-items:flex-start; min-height:120px; padding:20px;
+      border:1px solid rgba(255,139,91,.14); border-radius:18px;
+      background:linear-gradient(145deg,rgba(37,23,23,.66),rgba(19,15,19,.8)); box-shadow:inset 0 1px rgba(255,255,255,.035);
+    }
+    .flame-feature-icon {
+      display:grid; place-items:center; flex:0 0 40px; width:40px; height:40px;
+      border:1px solid rgba(255,129,83,.22); border-radius:12px; color:#ff9569; background:rgba(255,108,65,.09); font-size:1.15rem;
+    }
+    .flame-feature strong { display:block; color:#fff3eb; margin:1px 0 5px; }
+    .flame-feature p { margin:0; color:#ad9d98; font-size:.82rem; line-height:1.65; }
+    .flame-history-head {
+      display:flex; align-items:end; justify-content:space-between; gap:20px;
+      margin:76px 0 25px; padding-bottom:19px; border-bottom:1px solid rgba(255,135,87,.19);
+    }
+    .flame-history-head h3 { margin:9px 0 7px; color:#fff3eb; font-size:clamp(2rem,4vw,3rem); letter-spacing:-.055em; }
+    .flame-history-head p { margin:0; color:#b7a7a1; }
+    .flame-count { color:#8c7770; font-size:.65rem; font-weight:900; letter-spacing:.15em; white-space:nowrap; }
+    .flame-count b { display:block; margin-top:5px; color:#ff986c; font-size:1.3rem; letter-spacing:.06em; text-align:right; }
+    .flame-version-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; }
+    .flame-version {
+      position:relative; overflow:hidden; min-height:224px; padding:23px;
+      border:1px solid rgba(255,255,255,.09); border-radius:19px;
+      background:linear-gradient(145deg,rgba(39,27,29,.88),rgba(17,15,20,.93));
+      transition:transform .24s,border-color .24s,box-shadow .24s;
+    }
+    .flame-version:hover { transform:translateY(-5px); border-color:rgba(255,132,83,.4); box-shadow:0 22px 55px rgba(0,0,0,.24); }
+    .flame-version-current { border-color:rgba(255,131,82,.42); background:linear-gradient(145deg,rgba(87,39,27,.58),rgba(20,15,20,.95)); }
+    .flame-version-current::after { content:""; position:absolute; width:170px; height:170px; right:-65px; bottom:-95px; border-radius:50%; background:rgba(255,90,48,.15); filter:blur(20px); pointer-events:none; }
+    .flame-version-top { display:flex; align-items:center; justify-content:space-between; color:#a28f89; font-size:.68rem; font-weight:950; letter-spacing:.2em; }
+    .flame-version-number { color:#ff9a6e; font-size:1.7rem; letter-spacing:-.06em; }
+    .flame-version h4 { margin:17px 0 9px; color:#fff2ea; font-size:1.08rem; }
+    .flame-version p { min-height:73px; margin:0 0 17px; color:#b5a49e; font-size:.85rem; line-height:1.7; }
+    .flame-version-tag { display:inline-flex; align-items:center; gap:8px; padding:6px 9px; border:1px solid rgba(255,255,255,.1); border-radius:999px; color:#a8958e; font-size:.61rem; font-weight:950; letter-spacing:.08em; }
+    .flame-version-tag.current-tag { border-color:rgba(255,128,79,.3); color:#ffb18d; }
+    .unreleased-icon { display:grid; place-items:center; flex:0 0 39px; width:39px; height:39px; border:1px solid rgba(255,146,92,.24); border-radius:12px; color:#ff9d71; background:rgba(255,114,70,.08); font-size:1.25rem; }
+    .flame-unreleased { display:flex; align-items:flex-start; gap:14px; margin-top:17px; padding:19px 20px; border:1px solid rgba(255,145,87,.2); border-radius:17px; background:rgba(255,107,62,.055); }
+    .flame-unreleased strong { display:block; color:#ffe8da; margin-bottom:4px; }
+    .flame-unreleased p { margin:0; color:#b9a59c; font-size:.86rem; line-height:1.7; }
+    .flame-bottom-cta {
+      display:flex; align-items:center; justify-content:space-between; gap:26px; margin-top:55px; padding:27px 29px;
+      border:1px solid rgba(255,133,81,.2); border-radius:21px; background:linear-gradient(110deg,rgba(81,36,28,.48),rgba(24,16,20,.85));
+    }
+    .flame-bottom-cta h3 { margin:7px 0 0; color:#fff2ea; font-size:clamp(1.2rem,2.5vw,1.7rem); letter-spacing:-.04em; }
+    .flame-bottom-cta .flame-actions { margin-top:0; justify-content:flex-end; }
+    @media(max-width:980px) {
+      .nav-links { gap:5px; } .nav-links>a:not(.nav-cta):not(.project-tab) { padding:8px 7px; }
+      .project-tab { font-size:.63rem; padding:7px 8px; } .flame-feature-grid { grid-template-columns:1fr; }
+    }
+    @media(max-width:760px) {
+      .nav { min-height:72px; } .nav-links { width:100%; padding:8px 0 17px; }
+      .nav-links.open { display:flex; } .nav-links>a { width:100%; } .nav-links .project-tab { justify-content:center; }
+      .hero { min-height:0; padding:62px 0 56px; } .flame-hero { grid-template-columns:1fr; gap:8px; }
+      .flame-visual { min-height:270px; } .flame-core { width:145px; border-radius:38px; }
+      .flame-core span { font-size:6.3rem; } .flame-history-head { align-items:flex-start; flex-direction:column; margin-top:55px; }
+      .flame-count b { text-align:left; } .flame-version-grid { grid-template-columns:1fr; }
+      .flame-version { min-height:0; } .flame-version p { min-height:0; }
+      .flame-bottom-cta { flex-direction:column; align-items:flex-start; padding:22px; }
+      .flame-bottom-cta .flame-actions { justify-content:flex-start; }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      .palette-backdrop,.project-tab,.flame-button,.flame-version { transition:none!important; }
+    }
+
 </style>
 </head>
-<body data-theme="dark">
+<body data-theme="dark" data-project="chicken">
+  <div class="palette-backdrop" aria-hidden="true"></div>
   <div class="ambient-bg" id="ambientBg" aria-hidden="true"></div>
   <div class="loading-screen" id="loadingScreen" aria-label="Загрузка сайта">
     <div class="loading-inner"><div class="loading-mark" aria-hidden="true">🐔</div><div class="loading-title">CHICKEN ARCHER</div><div class="loading-sub">ПРИЦЕЛЬСЯ · ВЫСТРЕЛИ · ПОБЕДИ</div><div class="loading-track"><div class="loading-fill"></div></div></div>
@@ -326,6 +538,8 @@
         <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false">☰</button>
       </div>
       <nav class="nav-links" id="navLinks" aria-label="Главная навигация">
+        <a class="project-tab chicken-tab" href="#home" data-project-link="chicken">CHICKEN ARCHER</a>
+        <a class="project-tab flame-tab" href="#flame" data-project-link="flame">FLAME</a>
         <a href="#about">Об игре</a>
         <a href="#trailer">Трейлер</a>
         <a href="#version">Версия 3.0</a>
@@ -575,6 +789,68 @@
         </div>
       </div>
     </section>
+
+    <section id="flame" class="flame-section" aria-labelledby="flame-title">
+      <div class="container">
+        <div class="flame-topline"><span class="flame-mark" aria-hidden="true">🔥</span><span class="flame-overline">ОТДЕЛЬНЫЙ ПРОЕКТ · СВОЯ ИСТОРИЯ</span></div>
+        <div class="flame-hero">
+          <div class="flame-intro">
+            <span class="flame-status"><i></i> FLAME PROJECT</span>
+            <h2 id="flame-title" class="flame-title">FLAME<span>.</span></h2>
+            <p class="flame-lead">Отдельный проект со своим характером, оформлением и развитием. Здесь собраны опубликованные версии FLAME, краткая информация об обновлениях и ссылки на проект.</p>
+            <div class="flame-actions">
+              <a class="flame-button flame-button-primary" href="https://zxc-developer.itch.io/flame-streak" target="_blank" rel="noopener noreferrer">⬇ Скачать на itch.io</a>
+              <a class="flame-button flame-button-ghost" href="https://t.me/chicken_archer" target="_blank" rel="noopener noreferrer">✈ Telegram-канал</a>
+            </div>
+            <p class="flame-caption">Скачивание и доступные файлы находятся на странице FLAME в itch.io. В Telegram публикуются новости проектов.</p>
+          </div>
+          <div class="flame-visual" aria-label="Декоративная эмблема FLAME">
+            <div class="flame-orbit orbit-one"></div><div class="flame-orbit orbit-two"></div>
+            <div class="flame-core"><span>F</span></div>
+            <span class="flame-spark spark-one">✦</span><span class="flame-spark spark-two">✧</span>
+            <span class="flame-visual-label">BUILT TO EVOLVE</span>
+          </div>
+        </div>
+        <div class="flame-feature-grid">
+          <article class="flame-feature"><span class="flame-feature-icon">◈</span><div><strong>Собственный стиль</strong><p>У FLAME отдельное оформление и визуальная атмосфера — не смешиваем его с Chicken Archer.</p></div></article>
+          <article class="flame-feature"><span class="flame-feature-icon">♫</span><div><strong>Фоновая музыка</strong><p>В обновлении добавлена музыка, которая сопровождает работу с проектом.</p></div></article>
+          <article class="flame-feature"><span class="flame-feature-icon">✧</span><div><strong>Доработанный интерфейс</strong><p>Интерфейс FLAME получил дополнительные доработки.</p></div></article>
+        </div>
+        <div class="flame-history-head">
+          <div><span class="flame-overline">ВЕРСИИ ПРОЕКТА</span><h3>История FLAME</h3><p>Публичная история на этом сайте начинается с версии 1.3.</p></div>
+          <span class="flame-count">RELEASE ARCHIVE <b>01—03</b></span>
+        </div>
+        <div class="flame-version-grid">
+          <article class="flame-version">
+            <div class="flame-version-top"><span>FLAME</span><span class="flame-version-number">1.3</span></div>
+            <h4>Первый выпуск в архиве</h4><p>Одна из ранних опубликованных версий. С неё начинается история релизов FLAME на этом сайте.</p>
+            <span class="flame-version-tag">АРХИВНАЯ ВЕРСИЯ</span>
+          </article>
+          <article class="flame-version">
+            <div class="flame-version-top"><span>FLAME</span><span class="flame-version-number">1.4</span></div>
+            <h4>Следующий этап</h4><p>Промежуточный выпуск в развитии проекта между версиями 1.3 и 1.5.</p>
+            <span class="flame-version-tag">АРХИВНАЯ ВЕРСИЯ</span>
+          </article>
+          <article class="flame-version flame-version-current">
+            <div class="flame-version-top"><span>FLAME</span><span class="flame-version-number">1.5</span></div>
+            <h4>Обновление интерфейса и музыки</h4><p>Доработан интерфейс и добавлена фоновая музыка.</p>
+            <span class="flame-version-tag current-tag"><i></i> ПОСЛЕДНЯЯ УКАЗАННАЯ ВЕРСИЯ</span>
+          </article>
+        </div>
+        <div class="flame-unreleased">
+          <span class="unreleased-icon">ⓘ</span>
+          <div><strong>Почему нет версий 1.0 и 1.2?</strong><p>Версии FLAME 1.0 и 1.2 не были опубликованы по некоторым причинам. Поэтому архив на сайте начинается с 1.3.</p></div>
+        </div>
+        <div class="flame-bottom-cta">
+          <div><span class="flame-overline">ПОПРОБУЙ FLAME</span><h3>Открой проект и следи за обновлениями.</h3></div>
+          <div class="flame-actions">
+            <a class="flame-button flame-button-primary" href="https://zxc-developer.itch.io/flame-streak" target="_blank" rel="noopener noreferrer">Открыть FLAME на itch.io ↗</a>
+            <a class="flame-button flame-button-ghost" href="https://t.me/chicken_archer" target="_blank" rel="noopener noreferrer">Наш Telegram ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer>
@@ -586,7 +862,7 @@
         </a>
         <div class="footer-links"><a href="#about">Об игре</a><a href="#trailer">Трейлер</a><a href="#version">Версия 3.0</a><a href="#history">История</a><a href="#behind-scenes">За кулисами</a><a href="#socials">Соцсети</a><a href="https://zxc-developer.itch.io/chicken-archerr" target="_blank" rel="noopener noreferrer">itch.io ↗</a></div>
       </div>
-      <div class="footnote">© <span id="year">2026</span> Chicken Archer. Независимый игровой проект. Все ссылки на соцсети и поддержку управляются разработчиком.</div>
+      <div class="footnote">© <span id="year">2026</span> Chicken Archer & FLAME. Два независимых проекта.</div>
     </div>
   </footer>
 
@@ -826,5 +1102,42 @@
       }
     });
   </script>
+
+  <script>
+    // Switch the global palette as the visitor moves between the two project areas.
+    (() => {
+      const flameSection = document.getElementById('flame');
+      const projectLinks = document.querySelectorAll('[data-project-link]');
+      if (!flameSection) return;
+      const setProject = project => {
+        document.body.dataset.project = project;
+        projectLinks.forEach(link => {
+          const active = link.dataset.projectLink === project;
+          if (active) link.setAttribute('aria-current', 'page');
+          else link.removeAttribute('aria-current');
+        });
+      };
+      let framePending = false;
+      const updateProjectFromScroll = () => {
+        framePending = false;
+        const rect = flameSection.getBoundingClientRect();
+        const focusLine = window.innerHeight * .48;
+        setProject(rect.top <= focusLine && rect.bottom > focusLine ? 'flame' : 'chicken');
+      };
+      const scheduleUpdate = () => {
+        if (framePending) return;
+        framePending = true;
+        window.requestAnimationFrame(updateProjectFromScroll);
+      };
+      projectLinks.forEach(link => link.addEventListener('click', () => {
+        setProject(link.dataset.projectLink === 'flame' ? 'flame' : 'chicken');
+      }));
+      window.addEventListener('scroll', scheduleUpdate, {passive:true});
+      window.addEventListener('resize', scheduleUpdate);
+      window.addEventListener('hashchange', scheduleUpdate);
+      scheduleUpdate();
+    })();
+  </script>
+
 </body>
 </html>
