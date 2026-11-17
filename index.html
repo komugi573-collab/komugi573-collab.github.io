@@ -590,6 +590,31 @@
       .loading-title { letter-spacing:.055em; }
     }
 
+  
+    /* FLAME canvas is atmospheric background only; content must stay above it. */
+    .flame-section { position:relative; isolation:isolate; }
+    .flame-section > .container { position:relative; z-index:3; }
+    .flame-section > .flame-particles { position:absolute; z-index:1; inset:0; display:block; }
+    .flame-section::after { z-index:2; pointer-events:none; }
+
+  
+    #feather-facts { padding-top:clamp(70px,8vw,100px); }
+    #feather-facts .tip-panel { border-color:rgba(255,160,95,.2); }
+    @media(max-width:680px) {
+      #feather-facts .tip-panel { grid-template-columns:auto minmax(0,1fr); }
+      #feather-facts .tip-panel button { grid-column:1/-1; width:100%; }
+    }
+
+  
+    .mascot-button.mood-happy,.mascot-button.mood-excited { box-shadow:0 12px 35px rgba(0,0,0,.33),0 0 30px rgba(255,180,78,.22); }
+    .mascot-button.mood-curious { transform:rotate(5deg); }
+    .mascot-button.mood-confused { transform:rotate(-7deg); }
+    .mascot-button.mood-sleepy { filter:saturate(.78); }
+    .mascot-button.mood-proud { border-color:rgba(255,213,112,.85); }
+    .mascot-button.mood-playful { transform:rotate(8deg) scale(1.04); }
+    .mascot-button.mood-surprised { transform:scale(1.09); }
+    .mascot-button.mood-focused { filter:contrast(1.08); }
+
   </style>
 </head>
 <body data-theme="dark" data-project="chicken">
@@ -832,12 +857,7 @@
     </section>
 
 
-    <section id="feather-facts">
-      <div class="container">
-        <div class="section-head"><div><span class="kicker">Из мастерской разработчика</span><h2>Факты и заметки разработчика</h2><p class="section-sub">Нажми на кнопку — открой случайный факт о Chicken Archer, FLAME или процессе их разработки.</p></div></div>
-        <div class="panel tip-panel"><div class="tip-icon" id="tipIcon" aria-hidden="true">🛠️</div><div><h3 id="tipTitle">Заметка разработчика</h3><p id="tipText">Chicken Archer и FLAME — два отдельных проекта со своими идеями и оформлением.</p></div><button class="button button-primary" id="newTip" type="button">✦ Ещё факт</button></div>
-      </div>
-    </section>
+
 
 
 
@@ -934,6 +954,13 @@
             <details class="panel"><summary>Где следить за обновлениями FLAME?</summary><p>В официальном Telegram-канале публикуются новости обоих проектов. Там же можно найти FLAME для скачивания.</p><a class="faq-link" href="https://t.me/chicken_archer" target="_blank" rel="noopener noreferrer">Открыть Telegram ↗</a></details>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="feather-facts">
+      <div class="container">
+        <div class="section-head"><div><span class="kicker">Из мастерской разработчика</span><h2>Факты и заметки разработчика</h2><p class="section-sub">Нажми на кнопку — открой случайный факт о Chicken Archer, FLAME или процессе их разработки.</p></div></div>
+        <div class="panel tip-panel"><div class="tip-icon" id="tipIcon" aria-hidden="true">🛠️</div><div><h3 id="tipTitle">Заметка разработчика</h3><p id="tipText">Chicken Archer и FLAME — два отдельных проекта со своими идеями и оформлением.</p></div><button class="button button-primary" id="newTip" type="button">✦ Ещё факт</button></div>
       </div>
     </section>
 
@@ -1145,30 +1172,46 @@
     const mascotButton = document.getElementById('mascotButton');
     const mascotBubble = document.getElementById('mascotBubble');
     const mascotLines = [
-      { face:'😎', text:'Эй, лучник! Загляни в трейлер — там вся атмосфера игры.' },
-      { face:'💛', text:'Спасибо, что поддерживаешь Chicken Archer!' },
-      { face:'🤔', text:'У каждой версии своя история. Загляни в раздел обновлений!' },
-      { face:'📣', text:'Проверь Telegram — новости проекта появляются там.' },
-      { face:'🛠️', text:'Иногда лучший апгрейд — это исправить пару досадных багов.' },
-      { face:'🌙', text:'Попробуй сменить тему сайта — выбор сохранится на этом устройстве.' },
-      { face:'🎯', text:'Точное попадание — маленькая победа. Большая победа впереди!' },
-      { face:'🐣', text:'Ко-ко! Я слежу, чтобы на сайте было не скучно.' },
-      { face:'🧠', text:'Хорошая идея — это начало. Потом её ещё нужно аккуратно реализовать.' },
-      { face:'😅', text:'Разработка — это когда одна маленькая правка тянет за собой ещё три.' },
-      { face:'🪶', text:'Перышко за старание! Спасибо, что заглянул.' },
-      { face:'📚', text:'Хочешь узнать, как менялся проект? История обновлений ждёт тебя.' },
-      { face:'🎬', text:'Погляди трейлер — в нём Chicken Archer показывает себя во всей красе.' },
-      { face:'🌟', text:'Каждое обновление — ещё один шаг для проекта.' },
-      { face:'🧐', text:'Ты внимательно изучаешь сайт. Уважаю такой подход!' },
-      { face:'😴', text:'Даже лучнику иногда нужен перерыв. Не забывай отдыхать!' },
-      { face:'🧭', text:'Ищи интересное, а я пока посторожу сайт.' },
-      { face:'🎉', text:'Ко-ко-класс! Рад, что ты здесь.' }
+      { face:'😎', mood:'proud', text:'Эй, лучник! Загляни в трейлер — там вся атмосфера игры.' },
+      { face:'💛', mood:'happy', text:'Спасибо, что поддерживаешь Chicken Archer и FLAME!' },
+      { face:'🤔', mood:'curious', text:'Хм… Как думаешь, какой проект откроешь сегодня?' },
+      { face:'📣', mood:'excited', text:'Срочное куриное объявление: в Telegram есть новости обоих проектов!' },
+      { face:'🛠️', mood:'focused', text:'Я тут проверил интерфейс. Кажется, стало ещё аккуратнее!' },
+      { face:'🌙', mood:'sleepy', text:'Ночная смена началась. Даже пиксели уже хотят спать.' },
+      { face:'🎯', mood:'focused', text:'Цель вижу! Осталось только нажать на нужную кнопку.' },
+      { face:'🐣', mood:'happy', text:'Ко-ко! Маленький маскот, большие планы!' },
+      { face:'🧠', mood:'curious', text:'А знаешь? За каждой кнопкой обычно скрывается немного кода.' },
+      { face:'😅', mood:'confused', text:'Разработка: исправил одну мелочь, а рядом уже проснулись три бага.' },
+      { face:'🪶', mood:'happy', text:'Перышко за старание! Спасибо, что заглянул.' },
+      { face:'📚', mood:'curious', text:'Хочешь узнать историю проектов? Загляни в версии и обновления.' },
+      { face:'🎬', mood:'excited', text:'Камера, мотор, FLAME! Ну или Chicken Archer — выбирай сам.' },
+      { face:'🌟', mood:'excited', text:'Каждое обновление добавляет проектам немного блеска!' },
+      { face:'🧐', mood:'curious', text:'Ты внимательно изучаешь сайт. Уважаю такой подход!' },
+      { face:'😴', mood:'sleepy', text:'Даже лучнику иногда нужен перерыв. Не забывай отдыхать!' },
+      { face:'🧭', mood:'proud', text:'Я охраняю ссылки. Ни одна кнопка не потеряется!' },
+      { face:'🎉', mood:'excited', text:'Ко-ко-класс! Сегодня отличный день для новых открытий!' },
+      { face:'🤩', mood:'excited', text:'ВАУ! Ты нашёл ещё один уголок сайта!' },
+      { face:'😜', mood:'playful', text:'Пс-с! Кажется, я знаю секрет… Ладно, пока не скажу.' },
+      { face:'🙃', mood:'confused', text:'Я хотел сказать что-то умное, но забыл. Ко-ко.' },
+      { face:'🥳', mood:'excited', text:'Праздник? Я всегда готов! Даже если просто открыли раздел FLAME.' },
+      { face:'😳', mood:'surprised', text:'Ой! Не ожидал увидеть тебя так быстро!' },
+      { face:'🤓', mood:'focused', text:'Включаю режим разработчика. Где тут мои воображаемые очки?' },
+      { face:'🥶', mood:'sleepy', text:'Бр-р! Кажется, в FLAME пора добавить ещё немного огненного свечения.' },
+      { face:'😤', mood:'focused', text:'Собрался! Проверяю каждую мелочь, пока всё не станет на свои места.' },
+      { face:'🥹', mood:'happy', text:'Ого, ты снова здесь. Спасибо, что следишь за проектами!' },
+      { face:'😏', mood:'playful', text:'У меня есть план. Он секретный. И состоит из семи кнопок.' },
+      { face:'🤯', mood:'surprised', text:'Столько разделов! Моя куриная голова уже крутится.' },
+      { face:'🫡', mood:'proud', text:'На посту! Chicken Archer и FLAME под присмотром.' }
     ];
     const rareMascotLines = [
-      { face:'👑', text:'Редкая реакция! Ты только что увидел мою королевскую куриную сторону.' },
-      { face:'🕵️', text:'Так-так… Кажется, ты раскрыл один из моих редких характеров.' },
-      { face:'🚀', text:'Крылья расправлены, перья сияют — маскот готов к новым приключениям!' },
-      { face:'🥚', text:'Секретная куриная мудрость: не каждое яйцо становится омлетом. Вот и все дела.' }
+      { face:'👑', mood:'proud', text:'Секретная королевская форма! Сегодня куриное величие на максимуме.' },
+      { face:'🕵️', mood:'curious', text:'Так-так… Ты раскрыл редкую реакцию. Хорошая наблюдательность!' },
+      { face:'🚀', mood:'excited', text:'Турбо-крылья активированы! Маскот отправляется исследовать сайт.' },
+      { face:'🥚', mood:'playful', text:'Секретная куриная мудрость: даже большое приключение начинается с маленького яйца.' },
+      { face:'🦄', mood:'surprised', text:'Невероятно! Радужная куриная форма разблокирована. Почти.' },
+      { face:'🧙', mood:'focused', text:'Я немного поколдовал над кодом. Только никому не рассказывай!' },
+      { face:'👾', mood:'playful', text:'Пиксельный режим! Ко-ко-код принят.' },
+      { face:'💎', mood:'proud', text:'Редкость найдена! Ты получил воображаемый бриллиант от маскота.' }
     ];
     let lastMascotLine = -1;
     let lastRareMascotLine = -1;
@@ -1176,6 +1219,8 @@
     const triggerMascotReaction = (line, isRare = false, showNotice = true) => {
       if (!mascotButton || !mascotBubble || !line) return;
       mascotButton.textContent = line.face;
+      mascotButton.classList.remove('mood-happy','mood-excited','mood-curious','mood-confused','mood-sleepy','mood-proud','mood-playful','mood-surprised','mood-focused');
+      if (line.mood) mascotButton.classList.add('mood-' + line.mood);
       mascotBubble.textContent = line.text;
       mascotBubble.classList.add('show');
       mascotBubble.classList.toggle('rare', isRare);
@@ -1191,7 +1236,7 @@
 
     mascotButton.addEventListener('click', () => {
       // A rare reaction appears occasionally; ordinary reactions remain the common result.
-      if (Math.random() < 0.09) {
+      if (Math.random() < 0.16) {
         let nextRare = Math.floor(Math.random() * rareMascotLines.length);
         if (rareMascotLines.length > 1) while (nextRare === lastRareMascotLine) nextRare = Math.floor(Math.random() * rareMascotLines.length);
         lastRareMascotLine = nextRare;
