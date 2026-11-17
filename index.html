@@ -315,8 +315,9 @@
       isolation:isolate; position:relative; background:transparent;
       --site-accent:#ffd078; --site-secondary:#ff8750;
       --gold:var(--site-accent); --orange:var(--site-secondary);
-      --line:rgba(255,210,160,.17); transition:color .7s ease;
+      --line:rgba(255,210,160,.17); transition:--site-accent .9s ease,--site-secondary .9s ease,color .7s ease;
     }
+    body[data-theme="light"] { background:transparent; }
     body[data-project="flame"] { --site-accent:#ff784f; --site-secondary:#ffb34b; --line:rgba(255,116,72,.2); }
     body[data-project="flame"] .palette-backdrop {
       background:
@@ -818,7 +819,7 @@
         </div>
         <div class="flame-history-head">
           <div><span class="flame-overline">ВЕРСИИ ПРОЕКТА</span><h3>История FLAME</h3><p>Публичная история на этом сайте начинается с версии 1.3.</p></div>
-          <span class="flame-count">RELEASE ARCHIVE <b>01—03</b></span>
+          <span class="flame-count">RELEASE ARCHIVE <b>1.3—1.5</b></span>
         </div>
         <div class="flame-version-grid">
           <article class="flame-version">
