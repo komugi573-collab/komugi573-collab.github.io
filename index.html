@@ -615,6 +615,53 @@
     .mascot-button.mood-surprised { transform:scale(1.09); }
     .mascot-button.mood-focused { filter:contrast(1.08); }
 
+  
+    /* Official FLAME trailer — deliberately scoped to the FLAME section. */
+    .flame-trailer {
+      margin: clamp(34px,5vw,58px) 0 38px;
+      padding: clamp(16px,2.8vw,28px);
+      border: 1px solid rgba(255,133,83,.24);
+      border-radius: 24px;
+      background: linear-gradient(145deg,rgba(35,18,17,.88),rgba(17,13,17,.94));
+      box-shadow: 0 24px 70px rgba(0,0,0,.24), inset 0 1px rgba(255,255,255,.035);
+    }
+    .flame-trailer-heading {
+      display:flex; align-items:flex-end; justify-content:space-between; gap:18px;
+      margin-bottom:19px;
+    }
+    .flame-trailer-heading h3 {
+      margin:9px 0 6px; color:#fff4ed; font-size:clamp(1.55rem,3vw,2.25rem);
+      letter-spacing:-.045em;
+    }
+    .flame-trailer-heading p { margin:0; color:#bba9a2; line-height:1.65; }
+    .flame-trailer-badge {
+      flex:none; padding:7px 11px; border:1px solid rgba(255,133,83,.3);
+      border-radius:999px; color:#ffad87; background:rgba(255,105,64,.08);
+      font-size:.67rem; font-weight:950; letter-spacing:.16em;
+    }
+    .flame-trailer-frame {
+      overflow:hidden; border:1px solid rgba(255,151,101,.22);
+      border-radius:17px; background:#080608;
+      box-shadow:0 18px 48px rgba(0,0,0,.3);
+    }
+    .flame-trailer-frame video {
+      display:block; width:100%; max-height:680px; aspect-ratio:16/9;
+      object-fit:contain; background:#080608;
+    }
+    .flame-trailer-footer {
+      display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      gap:10px; padding:14px 3px 0; color:#9f8c85; font-size:.82rem;
+    }
+    .flame-trailer-footer a { color:#ffad87; font-weight:850; }
+    .flame-trailer-footer a:hover { color:#ffd0a7; text-decoration:underline; text-underline-offset:4px; }
+    @media(max-width:680px) {
+      .flame-trailer { padding:13px; border-radius:18px; }
+      .flame-trailer-heading { align-items:flex-start; }
+      .flame-trailer-badge { font-size:.6rem; }
+      .flame-trailer-frame { border-radius:12px; }
+      .flame-trailer-frame video { border-radius:11px; }
+    }
+
   </style>
 </head>
 <body data-theme="dark" data-project="chicken">
@@ -887,6 +934,27 @@
             <span class="flame-visual-label">BUILT TO EVOLVE</span>
           </div>
         </div>
+        <section class="flame-trailer" aria-labelledby="flame-trailer-title">
+          <div class="flame-trailer-heading">
+            <div>
+              <span class="flame-overline">ПРЕМЬЕРА · FLAME</span>
+              <h3 id="flame-trailer-title">Официальный трейлер</h3>
+              <p>Посмотри атмосферу FLAME в коротком кинематографичном ролике.</p>
+            </div>
+            <span class="flame-trailer-badge">TRAILER</span>
+          </div>
+          <div class="flame-trailer-frame">
+            <video controls preload="metadata" playsinline poster="flame_trailer_poster.jpg" aria-label="Официальный трейлер FLAME">
+              <source src="flame_trailer.mp4" type="video/mp4">
+              Твой браузер не поддерживает встроенное видео.
+              <a href="flame_trailer.mp4">Открыть трейлер FLAME</a>.
+            </video>
+          </div>
+          <div class="flame-trailer-footer">
+            <span>FLAME · Официальный трейлер</span>
+            <a href="flame_trailer.mp4" download>Скачать видео ↓</a>
+          </div>
+        </section>
         <div class="flame-feature-grid">
           <article class="flame-feature"><span class="flame-feature-icon">◈</span><div><strong>Собственный стиль</strong><p>У FLAME отдельное оформление и визуальная атмосфера — не смешиваем его с Chicken Archer.</p></div></article>
           <article class="flame-feature"><span class="flame-feature-icon">♫</span><div><strong>Фоновая музыка</strong><p>В обновлении добавлена музыка, которая сопровождает работу с проектом.</p></div></article>
