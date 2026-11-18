@@ -652,8 +652,6 @@
       display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
       gap:10px; padding:14px 3px 0; color:#9f8c85; font-size:.82rem;
     }
-    .flame-trailer-footer a { color:#ffad87; font-weight:850; }
-    .flame-trailer-footer a:hover { color:#ffd0a7; text-decoration:underline; text-underline-offset:4px; }
     @media(max-width:680px) {
       .flame-trailer { padding:13px; border-radius:18px; }
       .flame-trailer-heading { align-items:flex-start; }
@@ -774,12 +772,12 @@
         </div>
         <div class="panel trailer-shell">
           <div class="trailer-frame">
-            <video id="siteTrailer" controls playsinline preload="metadata" poster="trailer_poster.jpg" muted>
+            <video id="siteTrailer" controls playsinline preload="metadata" poster="trailer_poster.jpg">
               <source src="chicken_archer_trailer.mp4" type="video/mp4">
               Ваш браузер не поддерживает видео. <a href="chicken_archer_trailer.mp4">Открыть трейлер</a>.
             </video>
           </div>
-          <div class="trailer-controls"><span class="trailer-note">Chicken Archer · Официальный трейлер</span><button class="button button-secondary sound-toggle" id="soundToggle" type="button">🔇 Включить звук</button></div>
+          <div class="trailer-controls"><span class="trailer-note">Chicken Archer · Официальный трейлер</span><button class="button button-secondary sound-toggle" id="soundToggle" type="button">🔊 Звук включён</button></div>
         </div>
       </div>
     </section>
@@ -952,7 +950,6 @@
           </div>
           <div class="flame-trailer-footer">
             <span>FLAME · Официальный трейлер</span>
-            <a href="flame_trailer.mp4" download>Скачать видео ↓</a>
           </div>
         </section>
         <div class="flame-feature-grid">
@@ -1177,11 +1174,13 @@
     else window.addEventListener('load', hideLoader, { once:true });
     window.setTimeout(() => loadingScreen.classList.add('loaded'), 1800);
 
-    // Trailer audio is opt-in. The native video player retains seek, pause and fullscreen controls.
+    // Trailer audio is enabled by default. Visitors can still mute manually with the control.
     const trailer = document.getElementById('siteTrailer');
     const soundToggle = document.getElementById('soundToggle');
+    trailer.muted = false;
+    trailer.volume = 1;
     const syncSoundButton = () => {
-      soundToggle.textContent = trailer.muted ? '🔇 Включить звук' : '🔊 Выключить звук';
+      soundToggle.textContent = trailer.muted ? '🔇 Включить звук' : '🔊 Звук включён';
       soundToggle.setAttribute('aria-pressed', String(!trailer.muted));
     };
     syncSoundButton();
