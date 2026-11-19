@@ -660,7 +660,46 @@
       .flame-trailer-frame video { border-radius:11px; }
     }
 
-  </style>
+
+    /* 2026 visual refresh: wider video stages, clearer release cards and polished navigation. */
+    .container { width:min(1240px,calc(100% - 48px)); }
+    .topbar { box-shadow:0 12px 38px rgba(0,0,0,.12); }
+    .nav { min-height:82px; }
+    .nav-links { gap:clamp(12px,1.6vw,22px); }
+    .nav-links a:not(.nav-cta):hover { color:var(--gold); text-shadow:0 0 18px rgba(255,190,91,.25); }
+    .hero { min-height:660px; }
+    .art-panel { box-shadow:0 34px 100px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.06); }
+    .panel { border:1px solid var(--line); backdrop-filter:blur(12px); }
+    .button { box-shadow:0 10px 30px rgba(0,0,0,.12); }
+    .trailer-section { padding-top:84px; }
+    .trailer-section .container { width:min(1360px,calc(100% - 48px)); }
+    .trailer-shell { padding:clamp(14px,2.2vw,26px); border-radius:30px; }
+    .trailer-frame { border-radius:24px; }
+    .trailer-frame video { width:100%; max-height:min(78vh,820px); aspect-ratio:16/9; object-fit:contain; }
+    .trailer-controls { padding:18px 7px 3px; }
+    .flame-trailer { width:100%; padding:clamp(20px,3vw,34px); border-radius:28px; }
+    .flame-trailer-frame video { width:100%; max-height:min(80vh,860px); aspect-ratio:16/9; }
+    .flame-version { transition:transform .22s,border-color .22s,background .22s; }
+    .flame-version:hover { transform:translateY(-5px); border-color:rgba(255,174,95,.48); }
+    .flame-version-number { text-shadow:0 0 26px rgba(255,134,67,.2); }
+    .flame-caption { max-width:640px; }
+    .flame-archive-note { margin-top:22px; padding:20px 22px; border:1px solid rgba(255,169,92,.22); border-radius:18px; background:linear-gradient(120deg,rgba(255,140,70,.09),rgba(255,255,255,.025)); color:var(--muted); }
+    .flame-archive-note strong { display:block; margin-bottom:5px; color:var(--text); }
+    .flame-archive-note a { color:var(--gold); font-weight:850; text-decoration:underline; text-underline-offset:3px; }
+    .history-note a { color:var(--gold); font-weight:850; text-decoration:underline; text-underline-offset:3px; }
+    .social-card { transition:transform .2s,border-color .2s,box-shadow .2s; }
+    .social-card:hover { transform:translateY(-4px); border-color:rgba(255,207,104,.42); box-shadow:0 18px 48px rgba(0,0,0,.2); }
+    @media(max-width:680px) {
+      .container,.trailer-section .container { width:calc(100% - 28px); }
+      .hero { min-height:0; }
+      .trailer-section { padding-top:52px; }
+      .trailer-shell { padding:10px; border-radius:19px; }
+      .trailer-frame { border-radius:13px; }
+      .trailer-frame video,.flame-trailer-frame video { max-height:none; }
+      .flame-trailer { padding:14px; border-radius:19px; }
+      .flame-archive-note { padding:16px; }
+    }
+\n  </style>
 </head>
 <body data-theme="dark" data-project="chicken">
   <div class="palette-backdrop" aria-hidden="true"></div>
@@ -843,7 +882,7 @@
             <ul class="version-items"><li>Обновлённые меню и игровой интерфейс.</li><li>Профиль игрока с локальным сохранением.</li><li>Сезонный пропуск с бесплатной и премиальной ветками.</li><li>Дополнительные визуальные эффекты и улучшенные экраны результата.</li><li>Настройки звукового оформления и RU/EN.</li></ul>
           </article>
         </div>
-        <p class="history-note">Точные даты выпуска и отдельные файлы старых версий добавим, когда они будут подтверждены и доступны для скачивания.</p>
+        <p class="history-note">Старые версии Chicken Archer можно скачать в официальном <a href="https://t.me/chicken_archer" target="_blank" rel="noopener noreferrer">Telegram-канале ↗</a>.</p>
       </div>
     </section>
 
@@ -923,7 +962,7 @@
               <a class="flame-button flame-button-primary" href="https://zxc-developer.itch.io/flame-streak" target="_blank" rel="noopener noreferrer">⬇ Скачать на itch.io</a>
               <a class="flame-button flame-button-ghost" href="https://t.me/chicken_archer" target="_blank" rel="noopener noreferrer">✈ Telegram-канал</a>
             </div>
-            <p class="flame-caption">FLAME можно скачать на itch.io или через мой Telegram-канал. Там же выходят новости и материалы проектов.</p>
+            <p class="flame-caption">FLAME можно скачать на itch.io или через мой Telegram-канал. Здесь также собраны архивные версии 1.3 и 1.4.</p>
           </div>
           <div class="flame-visual" aria-label="Декоративная эмблема FLAME">
             <div class="flame-orbit orbit-one"></div><div class="flame-orbit orbit-two"></div>
@@ -954,7 +993,7 @@
         </section>
         <div class="flame-feature-grid">
           <article class="flame-feature"><span class="flame-feature-icon">◈</span><div><strong>Собственный стиль</strong><p>У FLAME отдельное оформление и визуальная атмосфера — не смешиваем его с Chicken Archer.</p></div></article>
-          <article class="flame-feature"><span class="flame-feature-icon">♫</span><div><strong>Фоновая музыка</strong><p>В обновлении добавлена музыка, которая сопровождает работу с проектом.</p></div></article>
+          <article class="flame-feature"><span class="flame-feature-icon">❄</span><div><strong>Зимний декор</strong><p>В FLAME 1.5 сохранено зимнее оформление. Музыкальный плеер в эту версию не входит.</p></div></article>
           <article class="flame-feature"><span class="flame-feature-icon">✧</span><div><strong>Доработанный интерфейс</strong><p>Интерфейс FLAME получил дополнительные доработки.</p></div></article>
         </div>
         <div class="flame-history-head">
@@ -974,7 +1013,7 @@
           </article>
           <article class="flame-version flame-version-current">
             <div class="flame-version-top"><span>FLAME</span><span class="flame-version-number">1.5</span></div>
-            <h4>Обновление интерфейса и музыки</h4><p>Доработан интерфейс и добавлена фоновая музыка.</p>
+            <h4>Зимнее оформление</h4><p>В версии 1.5 оставлен зимний декор. Музыкальный плеер удалён из проекта.</p>
             <span class="flame-version-tag current-tag"><i></i> ПОСЛЕДНЯЯ УКАЗАННАЯ ВЕРСИЯ</span>
           </article>
         </div>
@@ -1014,7 +1053,7 @@
           <div class="faq">
             <details class="panel"><summary>Где скачать FLAME?</summary><p>FLAME можно скачать со страницы проекта на itch.io или через официальный Telegram-канал.</p><a class="faq-link" href="https://zxc-developer.itch.io/flame-streak" target="_blank" rel="noopener noreferrer">Открыть FLAME на itch.io ↗</a></details>
             <details class="panel"><summary>Что такое FLAME?</summary><p>Это отдельный проект со своим интерфейсом, визуальным стилем и историей обновлений. Он не является частью Chicken Archer.</p></details>
-            <details class="panel"><summary>Что изменилось в FLAME 1.5?</summary><p>В этой версии был доработан интерфейс и добавлена фоновая музыка.</p></details>
+            <details class="panel"><summary>Что изменилось в FLAME 1.5?</summary><p>В этой версии оставлен зимний декор. Музыкальный плеер удалён.</p></details>
             <details class="panel"><summary>Почему на сайте нет FLAME 1.0 и 1.2?</summary><p>Эти версии не публиковались. История публичных выпусков на сайте начинается с 1.3.</p></details>
             <details class="panel"><summary>Где следить за обновлениями FLAME?</summary><p>В официальном Telegram-канале публикуются новости обоих проектов. Там же можно найти FLAME для скачивания.</p><a class="faq-link" href="https://t.me/chicken_archer" target="_blank" rel="noopener noreferrer">Открыть Telegram ↗</a></details>
           </div>
