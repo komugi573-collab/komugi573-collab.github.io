@@ -699,6 +699,36 @@
       .flame-trailer { padding:14px; border-radius:19px; }
       .flame-archive-note { padding:16px; }
     }
+\n
+    /* Direct archive downloads for FLAME 1.3 and 1.4. */
+    .flame-download-button {
+      display:flex; align-items:center; gap:13px; width:100%;
+      margin-top:17px; padding:13px 15px; border:1px solid rgba(255,190,115,.42);
+      border-radius:15px; color:#21140d;
+      background:linear-gradient(115deg,#ffe18b 0%,#ffac5a 52%,#ff7848 100%);
+      box-shadow:0 9px 24px rgba(255,121,55,.18),inset 0 1px rgba(255,255,255,.62);
+      transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .flame-download-button:hover {
+      transform:translateY(-3px); filter:brightness(1.06);
+      box-shadow:0 14px 30px rgba(255,121,55,.28),inset 0 1px rgba(255,255,255,.72);
+    }
+    .flame-download-button:active { transform:translateY(0) scale(.985); }
+    .flame-download-icon {
+      display:grid; place-items:center; flex:0 0 38px; height:38px;
+      border-radius:12px; background:rgba(80,36,18,.13);
+      font-size:23px; font-weight:950; line-height:1;
+    }
+    .flame-download-copy { display:grid; gap:2px; min-width:0; }
+    .flame-download-copy strong { font-size:.91rem; font-weight:950; }
+    .flame-download-copy small { color:rgba(50,27,16,.72); font-size:.7rem; font-weight:800; letter-spacing:.035em; }
+    .flame-download-arrow { margin-left:auto; font-size:1.1rem; font-weight:950; }
+    .flame-download-button:focus-visible { outline:3px solid #fff0c6; outline-offset:4px; }
+    @media(max-width:680px) {
+      .flame-download-button { margin-top:14px; padding:12px; }
+      .flame-download-icon { flex-basis:35px; height:35px; }
+    }
 \n  </style>
 </head>
 <body data-theme="dark" data-project="chicken">
@@ -1005,11 +1035,20 @@
             <div class="flame-version-top"><span>FLAME</span><span class="flame-version-number">1.3</span></div>
             <h4>Первый выпуск в архиве</h4><p>Одна из ранних опубликованных версий. С неё начинается история релизов FLAME на этом сайте.</p>
             <span class="flame-version-tag">АРХИВНАЯ ВЕРСИЯ</span>
+            <a class="flame-download-button" href="https://github.com/komugi573-collab/komugi573-collab.github.io/raw/refs/heads/main/downloads/flame-v1.3.apk" download="flame-v1.3.apk" aria-label="Скачать FLAME 1.3 APK">
+              <span class="flame-download-icon" aria-hidden="true">↓</span>
+              <span class="flame-download-copy"><strong>Скачать APK</strong><small>FLAME 1.3 · Android</small></span>
+              <span class="flame-download-arrow" aria-hidden="true">↗</span>
+            </a>
           </article>
           <article class="flame-version">
-            <div class="flame-version-top"><span>FLAME</span><span class="flame-version-number">1.4</span></div>
             <h4>Следующий этап</h4><p>Промежуточный выпуск в развитии проекта между версиями 1.3 и 1.5.</p>
             <span class="flame-version-tag">АРХИВНАЯ ВЕРСИЯ</span>
+            <a class="flame-download-button" href="https://github.com/komugi573-collab/komugi573-collab.github.io/raw/refs/heads/main/downloads/flame-v1.4.apk" download="flame-v1.4.apk" aria-label="Скачать FLAME 1.4 APK">
+              <span class="flame-download-icon" aria-hidden="true">↓</span>
+              <span class="flame-download-copy"><strong>Скачать APK</strong><small>FLAME 1.4 · Android</small></span>
+              <span class="flame-download-arrow" aria-hidden="true">↗</span>
+            </a>
           </article>
           <article class="flame-version flame-version-current">
             <div class="flame-version-top"><span>FLAME</span><span class="flame-version-number">1.5</span></div>
@@ -1463,7 +1502,7 @@
         canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
         canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const count = Math.min(68, Math.max(24, Math.round(width / 18)));
+        const count = Math.min(82, Math.max(28, Math.round(width / 16.5)));
         particles = Array.from({length:count}, () => createParticle(true));
         if (reduceMotion) drawStatic();
       };
