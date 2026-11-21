@@ -4,13 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#100e13">
-  <meta name="description" content="Официальный сайт проектов Chicken Archer и FLAME: версии, трейлеры, обновления и ссылки на загрузку.">
-  <meta property="og:title" content="Chicken Archer & FLAME — официальный сайт проектов">
-  <meta property="og:description" content="Два независимых проекта в одном месте: Chicken Archer и FLAME. Новости, версии и ссылки на загрузку.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="trailer_poster.jpg">
   <meta name="color-scheme" content="dark light">
-  <title>Chicken Archer & FLAME — официальные проекты</title>
+  <title>Chicken Archer и FLAME — официальный сайт проектов</title>
+  <meta name="description" content="Официальный сайт проектов Chicken Archer и FLAME: последняя версия Chicken Archer 3.0 «Проклятие Лунного моря», трейлеры, история обновлений, архив FLAME и ссылки на загрузку.">
+  <link rel="canonical" href="https://komugi573-collab.github.io/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta property="og:site_name" content="Chicken Archer и FLAME">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="https://komugi573-collab.github.io/">
+  <meta property="og:title" content="Chicken Archer и FLAME — официальный сайт проектов">
+  <meta property="og:description" content="Два независимых проекта в одном месте: Chicken Archer 3.0 и FLAME. Трейлеры, версии, новости и ссылки на загрузку.">
+  <meta property="og:image" content="https://komugi573-collab.github.io/trailer_poster.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="720">
+  <meta property="og:image:alt" content="Кадр из официального трейлера Chicken Archer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chicken Archer и FLAME — официальный сайт проектов">
+  <meta name="twitter:description" content="Трейлеры, версии, история обновлений и ссылки на загрузку Chicken Archer и FLAME.">
+  <meta name="twitter:image" content="https://komugi573-collab.github.io/trailer_poster.jpg">
+  <meta name="twitter:image:alt" content="Кадр из официального трейлера Chicken Archer">
+  <script>
+    // Pre-paint flags: scripted-page marker, "loader already shown in this session", and a safety net for slow/broken scripts.
+    (function () {
+      var d = document.documentElement; d.classList.add('js');
+      try { if (sessionStorage.getItem('ca-loader-seen') === '1') d.classList.add('loader-skip'); } catch (e) {}
+      try { if (localStorage.getItem('chicken-archer-theme') === 'light') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f3ec'); } catch (e) {}
+      setTimeout(function () { d.classList.add('is-ready', 'reveal-all'); }, 5500);
+    })();
+  </script>
   <style>
     :root {
       color-scheme: dark;
@@ -205,18 +231,9 @@
     .ambient-bg { position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
     main, footer { position:relative; z-index:1; }
     .ambient-particle { position:absolute; top:-8vh; color:var(--gold); opacity:0; text-shadow:0 0 14px rgba(255,184,69,.55); animation:ambientFall linear infinite; }
+    .loading-screen { position:fixed; inset:0; }
     .ambient-particle.dot { width:4px; height:4px; border-radius:50%; background:var(--orange); box-shadow:0 0 14px rgba(255,135,71,.8); }
     @keyframes ambientFall { 0% { transform:translate3d(0,-8vh,0) rotate(0deg); opacity:0; } 12% { opacity:.48; } 80% { opacity:.3; } 100% { transform:translate3d(var(--drift,30px),112vh,0) rotate(240deg); opacity:0; } }
-    .loading-screen { position:fixed; inset:0; z-index:1000; display:grid; place-items:center; padding:24px; background:#0a090c; opacity:1; visibility:visible; transition:opacity .45s ease, visibility .45s ease; }
-    .loading-screen.loaded { opacity:0; visibility:hidden; pointer-events:none; }
-    .loading-inner { width:min(340px,90vw); text-align:center; }
-    .loading-mark { width:82px; height:82px; display:grid; place-items:center; margin:0 auto 20px; border:1px solid rgba(255,207,104,.45); border-radius:25px; background:linear-gradient(135deg,#1f191a,#0c0b0e); color:#ffcf68; font-size:2.8rem; box-shadow:0 0 42px rgba(255,172,59,.13); animation:loadingBob 1.2s ease-in-out infinite; }
-    .loading-title { color:#fff8ee; font-size:1.1rem; font-weight:1000; letter-spacing:.14em; }
-    .loading-sub { margin-top:7px; color:#ab9caa; font-size:.75rem; letter-spacing:.18em; }
-    .loading-track { height:5px; margin-top:25px; overflow:hidden; border-radius:99px; background:#282029; }
-    .loading-fill { width:0; height:100%; border-radius:inherit; background:linear-gradient(90deg,#ffcf68,#ff8747); animation:loadingProgress 1.15s ease forwards; }
-    @keyframes loadingProgress { to { width:100%; } }
-    @keyframes loadingBob { 50% { transform:translateY(-5px) rotate(-3deg); } }
     .trailer-section { padding-top:72px; }
     .trailer-shell { padding:clamp(10px,2vw,20px); overflow:hidden; }
     .trailer-frame { position:relative; overflow:hidden; border:1px solid rgba(255,207,104,.28); border-radius:20px; background:#070609; box-shadow:0 22px 58px rgba(0,0,0,.28); }
@@ -263,11 +280,6 @@
     body[data-theme="light"] .mascot-button { background:linear-gradient(145deg,#fff1d4,#fffaf3); }
     body[data-theme="light"] .ambient-particle { text-shadow:0 0 14px rgba(181,104,16,.25); }
     body[data-theme="light"] .latest::after { color:rgba(155,92,8,.06); }
-    body[data-theme="light"] .loading-screen { background:#f7f3ec; }
-    body[data-theme="light"] .loading-mark { background:linear-gradient(135deg,#fff1d4,#fffaf3); }
-    body[data-theme="light"] .loading-title { color:#211710; }
-    body[data-theme="light"] .loading-sub { color:#6d625c; }
-    body[data-theme="light"] .loading-track { background:#e8ddce; }
     body[data-theme="light"] .button-primary { color:#fff8ee; }
     @media (max-width:900px) { .top-actions { margin-left:auto; } .nav { flex-wrap:wrap; } }
     @media (max-width:680px) {
@@ -283,7 +295,7 @@
       .toast-region { top:80px; right:12px; width:calc(100vw - 24px); }
       .trailer-controls { align-items:flex-start; }
     }
-    @media (prefers-reduced-motion:reduce) { .ambient-particle { display:none; } .loading-mark { animation:none; } }
+    @media (prefers-reduced-motion:reduce) { .ambient-particle { display:none; } }
 
   
     .history-note { margin:18px 2px 0; color:var(--muted); font-size:.82rem; line-height:1.65; }
@@ -566,13 +578,6 @@
     @media(prefers-reduced-motion:reduce) { .palette-transition-glow { filter:none; } }
 
   
-    .loading-mark-duo { display:flex; align-items:center; justify-content:center; gap:4px; width:92px; height:92px; font-size:1.55rem; font-weight:1000; letter-spacing:-.08em; background:linear-gradient(140deg,#35251b 0%,#20151b 50%,#291311 100%); border-color:rgba(255,166,102,.55); box-shadow:0 0 32px rgba(255,170,89,.20),0 0 58px rgba(255,86,63,.14); }
-    .loading-mark-duo span { color:#ffdb8b; }
-    .loading-mark-duo i { color:#c9aaa0; font-size:1rem; font-style:normal; }
-    .loading-mark-duo b { color:#ff8054; }
-    .loading-title { font-size:clamp(.86rem,3vw,1.08rem); letter-spacing:.09em; }
-    .loading-title span { color:#ff9a68; }
-    .loading-sub { font-size:clamp(.56rem,2vw,.72rem); letter-spacing:.13em; }
     .faq-section { padding-top:clamp(72px,8vw,100px); }
     .faq-project + .faq-project { margin-top:38px; padding-top:30px; border-top:1px solid var(--line); }
     .faq-project-head { margin-bottom:17px; }
@@ -587,7 +592,6 @@
       .palette-transition { height:190px; margin-top:-12px; margin-bottom:-36px; }
       .palette-transition::before { inset:-25% -25%; filter:blur(32px); }
       .palette-transition-glow { left:-8%; right:-8%; height:42%; filter:blur(30px); }
-      .loading-title { letter-spacing:.055em; }
     }
 
   
@@ -606,14 +610,6 @@
     }
 
   
-    .mascot-button.mood-happy,.mascot-button.mood-excited { box-shadow:0 12px 35px rgba(0,0,0,.33),0 0 30px rgba(255,180,78,.22); }
-    .mascot-button.mood-curious { transform:rotate(5deg); }
-    .mascot-button.mood-confused { transform:rotate(-7deg); }
-    .mascot-button.mood-sleepy { filter:saturate(.78); }
-    .mascot-button.mood-proud { border-color:rgba(255,213,112,.85); }
-    .mascot-button.mood-playful { transform:rotate(8deg) scale(1.04); }
-    .mascot-button.mood-surprised { transform:scale(1.09); }
-    .mascot-button.mood-focused { filter:contrast(1.08); }
 
   
     /* Official FLAME trailer — deliberately scoped to the FLAME section. */
@@ -699,7 +695,7 @@
       .flame-trailer { padding:14px; border-radius:19px; }
       .flame-archive-note { padding:16px; }
     }
-\n
+
     /* Direct archive downloads for FLAME 1.3 and 1.4. */
     .flame-download-button {
       display:flex; align-items:center; gap:13px; width:100%;
@@ -729,19 +725,162 @@
       .flame-download-button { margin-top:14px; padding:12px; }
       .flame-download-icon { flex-basis:35px; height:35px; }
     }
-\n  </style>
+  </style>
+  <link rel="stylesheet" href="assets/refresh.css">
+  <script src="assets/refresh.js" defer></script>
+  <script src="assets/mascot.js" defer></script>
 </head>
 <body data-theme="dark" data-project="chicken">
   <div class="palette-backdrop" aria-hidden="true"></div>
   <div class="ambient-bg" id="ambientBg" aria-hidden="true"></div>
-  <div class="loading-screen" id="loadingScreen" aria-label="Загрузка сайта двух проектов">
-    <div class="loading-inner">
-      <div class="loading-mark loading-mark-duo" aria-hidden="true"><span>CA</span><i>×</i><b>F</b></div>
-      <div class="loading-title">CHICKEN ARCHER <span>×</span> FLAME</div>
-      <div class="loading-sub">ДВА НЕЗАВИСИМЫХ ПРОЕКТА · ОДИН САЙТ</div>
-      <div class="loading-track"><div class="loading-fill"></div></div>
+  <template id="chickyTemplate">
+<svg class="chicky" viewBox="0 0 200 228" data-emo="calm" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="cgBody" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#fff6cf"/><stop offset=".55" stop-color="#f6dca2"/><stop offset="1" stop-color="#dca35e"/></linearGradient>
+        <linearGradient id="cgCrest" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff8b68"/><stop offset="1" stop-color="#d94250"/></linearGradient>
+        <linearGradient id="cgBeak" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe98a"/><stop offset="1" stop-color="#ff9a38"/></linearGradient>
+        <linearGradient id="cgWing" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8e2ac"/><stop offset="1" stop-color="#d89c58"/></linearGradient>
+        <clipPath id="cgClipL"><ellipse cx="76" cy="94" rx="13.4" ry="14.4"/></clipPath>
+        <clipPath id="cgClipR"><ellipse cx="124" cy="94" rx="13.4" ry="14.4"/></clipPath>
+      </defs>
+      <ellipse class="shadow" cx="100" cy="222" rx="58" ry="7.5" fill="#000" opacity=".28"/>
+      <g class="bodyg">
+        <!-- quiver with arrows peeking over the shoulder -->
+        <g class="quiver" transform="rotate(24 142 78)">
+          <path d="M132 52l-3-15 7 4zM139 52l1-19 6 7zM144 52l5-13 2 9z" fill="#fff5d7" stroke="#4b2923" stroke-width="2.6" stroke-linejoin="round"/>
+          <rect x="125" y="50" width="23" height="62" rx="8" fill="#a55b3f" stroke="#4b2923" stroke-width="4"/>
+          <path d="M130 68h13M130 80h13" stroke="#6e3a28" stroke-width="2.4" stroke-linecap="round"/>
+        </g>
+        <!-- legs -->
+        <path d="M84 192v20M116 192v20" stroke="#e9a24f" stroke-width="9" stroke-linecap="round"/>
+        <path d="M70 216h28M102 216h28" stroke="#4b2923" stroke-width="5.5" stroke-linecap="round"/>
+        <!-- body -->
+        <path class="body" d="M100 40C142 40 166 78 164 124C162 170 140 198 100 198C60 198 38 170 36 124C34 78 58 40 100 40Z" fill="url(#cgBody)" stroke="#4b2923" stroke-width="5.5" stroke-linejoin="round"/>
+        <ellipse cx="100" cy="162" rx="35" ry="28" fill="#fffaea" opacity=".55"/>
+        <path d="M60 70c8-10 20-16 34-17" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".5"/>
+        <path d="M47 105C76 124 108 158 148 169" fill="none" stroke="#6f4130" stroke-width="9" stroke-linecap="round"/>
+        <path d="M49 103C77 121 108 155 146 166" fill="none" stroke="#d9a066" stroke-width="1.6" stroke-dasharray="4 4" stroke-linecap="round"/>
+        <!-- wings (shoulder is the rotation origin) -->
+        <g class="wing-l"><path d="M46 112C26 110 14 134 22 166C32 174 44 152 46 112Z" fill="url(#cgWing)" stroke="#4b2923" stroke-width="5" stroke-linejoin="round"/><path d="M34 134c-3 8-3 16-1 22" fill="none" stroke="#b77b4d" stroke-width="3" stroke-linecap="round" opacity=".7"/></g>
+        <g class="wing-r"><path d="M154 112C174 110 186 134 178 166C168 174 156 152 154 112Z" fill="url(#cgWing)" stroke="#4b2923" stroke-width="5" stroke-linejoin="round"/><path d="M166 134c3 8 3 16 1 22" fill="none" stroke="#b77b4d" stroke-width="3" stroke-linecap="round" opacity=".7"/></g>
+        <!-- head details -->
+        <g class="head-tilt"><g class="face">
+          <path class="crest" d="M80 48C66 28 84 12 96 28C100 6 126 10 122 34C142 24 150 48 130 56" fill="url(#cgCrest)" stroke="#4b2923" stroke-width="5" stroke-linejoin="round"/>
+          <ellipse class="blush" cx="55" cy="115" rx="10.5" ry="6.5" fill="#ff7f7a"/>
+          <ellipse class="blush" cx="145" cy="115" rx="10.5" ry="6.5" fill="#ff7f7a"/>
+          <!-- left eye (viewer's left) -->
+          <g class="eye-l-g">
+            <g class="eye-open">
+              <ellipse class="eyewhite" cx="76" cy="94" rx="13" ry="14" fill="#fffdf6" stroke="#4b2923" stroke-width="3.2"/>
+              <g clip-path="url(#cgClipL)">
+                <g class="pupil"><circle cx="76" cy="95" r="6.4" fill="#36201b"/><circle cx="78.4" cy="92.4" r="2.1" fill="#fff"/></g>
+                <g class="sparkle"><path transform="translate(76 94)" d="M0-8L2.2-2.2L8 0L2.2 2.2L0 8L-2.2 2.2L-8 0L-2.2-2.2Z" fill="#fff" stroke="#ffcf68" stroke-width="1.6" stroke-linejoin="round"/></g>
+                <g class="lid"><rect x="58" y="46" width="36" height="32" fill="#f8e2ac"/><path d="M62 78Q76 83 90 78" fill="none" stroke="#4b2923" stroke-width="3.6" stroke-linecap="round"/></g>
+              </g>
+            </g>
+            <path class="eye-arc" d="M64 99Q76 82 88 99" fill="none" stroke="#4b2923" stroke-width="5" stroke-linecap="round"/>
+          </g>
+          <!-- right eye -->
+          <g class="eye-r-g">
+            <g class="eye-open">
+              <ellipse class="eyewhite" cx="124" cy="94" rx="13" ry="14" fill="#fffdf6" stroke="#4b2923" stroke-width="3.2"/>
+              <g clip-path="url(#cgClipR)">
+                <g class="pupil"><circle cx="124" cy="95" r="6.4" fill="#36201b"/><circle cx="126.4" cy="92.4" r="2.1" fill="#fff"/></g>
+                <g class="sparkle"><path transform="translate(124 94)" d="M0-8L2.2-2.2L8 0L2.2 2.2L0 8L-2.2 2.2L-8 0L-2.2-2.2Z" fill="#fff" stroke="#ffcf68" stroke-width="1.6" stroke-linejoin="round"/></g>
+                <g class="lid"><rect x="106" y="46" width="36" height="32" fill="#f8e2ac"/><path d="M110 78Q124 83 138 78" fill="none" stroke="#4b2923" stroke-width="3.6" stroke-linecap="round"/></g>
+              </g>
+            </g>
+            <path class="eye-arc" d="M112 99Q124 82 136 99" fill="none" stroke="#4b2923" stroke-width="5" stroke-linecap="round"/>
+          </g>
+          <path class="brow-l" d="M62 73Q76 66 90 73" fill="none" stroke="#4b2923" stroke-width="5" stroke-linecap="round"/>
+          <path class="brow-r" d="M110 73Q124 66 138 73" fill="none" stroke="#4b2923" stroke-width="5" stroke-linecap="round"/>
+          <!-- beak: dark mouth interior, lower beak, upper beak -->
+          <ellipse class="mouth-in" cx="100" cy="117" rx="9.5" ry="7" fill="#6a1f2a"/>
+          <path class="jaw" d="M90 117Q100 122 110 117Q108 130 100 131Q92 130 90 117Z" fill="url(#cgBeak)" stroke="#4b2923" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M86 106Q100 98 114 106Q111 121 100 123Q89 121 86 106Z" fill="url(#cgBeak)" stroke="#4b2923" stroke-width="4.4" stroke-linejoin="round"/>
+          <path d="M94 105q6-2 12 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".6"/>
+          <!-- cheek lines (mouth shapes) -->
+          <path class="m-smile" d="M72 117Q75 131 90 133M128 117Q125 131 110 133" fill="none" stroke="#4b2923" stroke-width="3.8" stroke-linecap="round"/>
+          <path class="m-frown" d="M74 135Q82 124 90 129M126 135Q118 124 110 129" fill="none" stroke="#4b2923" stroke-width="3.8" stroke-linecap="round"/>
+          <path class="m-smirk" d="M112 130Q124 131 131 118" fill="none" stroke="#4b2923" stroke-width="3.8" stroke-linecap="round"/>
+          <path class="m-wob" d="M84 137q4-4 8 0t8 0t8 0t8 0" fill="none" stroke="#4b2923" stroke-width="3.4" stroke-linecap="round"/>
+          <path class="sweat" d="M152 66C145 77 145 86 152 89C159 86 159 77 152 66Z" fill="#8fd3ff" stroke="#3f7da8" stroke-width="2.2" stroke-linejoin="round"/>
+        </g></g>
+        <g class="zzz" fill="#a9c8ff" stroke="#3d5f9a" stroke-width=".8" font-family="system-ui, sans-serif" font-weight="900">
+          <text x="150" y="42" font-size="20">z</text><text x="162" y="26" font-size="15">z</text><text x="171" y="12" font-size="11">z</text>
+        </g>
+      </g>
+    </svg>
+  </template>
+  <div class="loading-screen" id="loadingScreen" aria-label="Загрузка сайта Chicken Archer и FLAME">
+    <div class="ld-bg" aria-hidden="true"><i class="ld-blob b1"></i><i class="ld-blob b2"></i><i class="ld-blob b3"></i></div>
+    <div class="ld-sparks" aria-hidden="true"><i style="--x:44%;--s:3px;--t:5.9s;--dl:-0.3s;--dx:45px"></i><i style="--x:71%;--s:2px;--t:5.8s;--dl:-0.3s;--dx:4px"></i><i style="--x:30%;--s:2px;--t:4.8s;--dl:-2.5s;--dx:-30px"></i><i style="--x:14%;--s:4px;--t:4.7s;--dl:-3.4s;--dx:-32px"></i><i style="--x:83%;--s:2px;--t:6.5s;--dl:-2.4s;--dx:-32px"></i><i style="--x:8%;--s:3px;--t:5.5s;--dl:-0.9s;--dx:-45px"></i><i style="--x:76%;--s:3px;--t:6.5s;--dl:-4.1s;--dx:-47px"></i><i style="--x:77%;--s:3px;--t:5.8s;--dl:-3.3s;--dx:-52px"></i><i style="--x:75%;--s:2px;--t:6.7s;--dl:-3.0s;--dx:8px"></i><i style="--x:57%;--s:3px;--t:6.1s;--dl:-5.5s;--dx:-14px"></i><i style="--x:41%;--s:3px;--t:7.3s;--dl:-4.2s;--dx:-29px"></i><i style="--x:13%;--s:3px;--t:6.3s;--dl:-5.3s;--dx:33px"></i><i style="--x:60%;--s:3px;--t:6.6s;--dl:-0.4s;--dx:5px"></i><i style="--x:56%;--s:3px;--t:7.1s;--dl:-0.9s;--dx:2px"></i><i style="--x:56%;--s:2px;--t:7.9s;--dl:-0.5s;--dx:11px"></i><i style="--x:76%;--s:3px;--t:5.7s;--dl:-2.1s;--dx:3px"></i><i style="--x:77%;--s:4px;--t:4.7s;--dl:-0.6s;--dx:-26px"></i><i style="--x:63%;--s:2px;--t:4.7s;--dl:-4.2s;--dx:22px"></i></div>
+    <div class="ld-flash" aria-hidden="true"></div>
+    <div class="ld-stage">
+      <div class="ld-halo" aria-hidden="true"></div>
+      <div class="ld-mascot" id="ldMascot" aria-hidden="true"></div>
+      <div class="ld-logo"><div class="ld-word"><span class="w1">CHICKEN</span><span class="w2">ARCHER</span></div></div>
+      <div class="ld-tag">THE ARCADE ADVENTURE <b>×</b> FLAME</div>
+      <div class="ld-bar" id="ldBar" role="progressbar" aria-label="Подготовка сайта" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0">
+        <div class="ld-track"><div class="ld-fill"></div></div>
+        <svg class="ld-arrow" viewBox="0 0 44 24" aria-hidden="true"><path d="M3 12h33" stroke="#e9b27a" stroke-width="3" stroke-linecap="round"/><path d="M3 12l8-7M3 12l8 7M9 12l8-7M9 12l8 7" stroke="#ff8747" stroke-width="2.6" stroke-linecap="round"/><path d="M31 4l12 8-12 8z" fill="#ffd078" stroke="#4b2923" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <svg class="ld-target" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#2a1b1e" stroke="#ffcf68" stroke-width="2"/><circle cx="15" cy="15" r="9" fill="#ff5a3c"/><circle cx="15" cy="15" r="5" fill="#fff4d8"/><circle cx="15" cy="15" r="2" fill="#d94250"/></svg>
+      </div>
+      <div class="ld-status" id="ldStatus" aria-live="polite">Разбираем страницу…</div>
     </div>
   </div>
+  <script>
+    // Loading screen: real milestones only (HTML parsed → fonts → interface scripts → first painted frame).
+    // It never waits for the trailers, is shown once per browser session and can be skipped with a tap or key press.
+    (() => {
+      const root = document.documentElement, scr = document.getElementById('loadingScreen');
+      try { if (localStorage.getItem('chicken-archer-theme') === 'light') document.body.dataset.theme = 'light'; } catch (_) {}
+      if (!scr || root.classList.contains('loader-skip')) { root.classList.add('is-ready'); return; }
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const tpl = document.getElementById('chickyTemplate'), host = document.getElementById('ldMascot');
+      let svg = null;
+      if (tpl && host) {
+        host.innerHTML = tpl.innerHTML.replace(/id="(cg\w+)"/g, 'id="$1-ld"').replace(/url\(#(cg\w+)\)/g, 'url(#$1-ld)');
+        svg = host.querySelector('.chicky'); if (svg) svg.classList.add('on');
+      }
+      const emo = e => { if (svg) svg.dataset.emo = e; };
+      let blinkTimer = 0;
+      if (svg && !reduce) {
+        setTimeout(() => { emo('happy'); svg.classList.add('waving'); }, 700);
+        const blink = () => { svg.classList.add('blink'); setTimeout(() => svg.classList.remove('blink'), 130); blinkTimer = setTimeout(blink, 1800 + Math.random() * 1600); };
+        blinkTimer = setTimeout(blink, 1100);
+      }
+      const labels = ['Разбираем страницу…', 'Подключаем оформление…', 'Оживляем интерфейс…', 'Готово!'];
+      const bar = document.getElementById('ldBar'), status = document.getElementById('ldStatus');
+      const t0 = performance.now();
+      let done = 0, finishing = false, minShow = reduce ? 150 : 750;
+      const finish = () => {
+        clearTimeout(blinkTimer);
+        scr.classList.add('hit');
+        if (svg) { svg.classList.remove('waving'); emo('delight'); svg.classList.add('flap'); }
+        setTimeout(() => {
+          scr.classList.add('loaded'); root.classList.add('is-ready');
+          document.dispatchEvent(new Event('site:ready'));
+          try { sessionStorage.setItem('ca-loader-seen', '1'); } catch (_) {}
+          setTimeout(() => { scr.style.display = 'none'; }, 900);
+        }, reduce ? 0 : 430);
+      };
+      const mark = n => {
+        if (n <= done) return;
+        done = n; scr.style.setProperty('--p', String(done / 4));
+        bar.setAttribute('aria-valuenow', String(done)); status.textContent = labels[Math.min(done, 3)];
+        if (done >= 4 && !finishing) { finishing = true; setTimeout(finish, Math.max(0, minShow - (performance.now() - t0))); }
+      };
+      const domReady = new Promise(r => document.readyState !== 'loading' ? r() : document.addEventListener('DOMContentLoaded', r, { once: true }));
+      domReady.then(() => mark(1));
+      const fontsReady = domReady.then(() => (document.fonts && document.fonts.ready) || null).then(() => mark(2));
+      const uiReady = Promise.all([fontsReady, new Promise(r => window.__caUi ? r() : document.addEventListener('ca:ui', r, { once: true }))]).then(() => mark(3));
+      uiReady.then(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)))).then(() => mark(4));
+      setTimeout(() => mark(4), 3200);                                   // never trap the visitor
+      const skip = () => { minShow = 0; mark(4); };
+      scr.addEventListener('pointerdown', skip, { once: true }); addEventListener('keydown', skip, { once: true });
+    })();
+  </script>
   <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="false"></div>
   <header class="topbar">
     <div class="container nav">
@@ -1011,7 +1150,7 @@
             <span class="flame-trailer-badge">TRAILER</span>
           </div>
           <div class="flame-trailer-frame">
-            <video controls preload="metadata" playsinline poster="flame_trailer_poster.jpg" aria-label="Официальный трейлер FLAME">
+            <video controls preload="none" playsinline poster="flame_trailer_poster.jpg" aria-label="Официальный трейлер FLAME" data-lazy-video>
               <source src="flame_trailer.mp4" type="video/mp4">
               Твой браузер не поддерживает встроенное видео.
               <a href="flame_trailer.mp4">Открыть трейлер FLAME</a>.
@@ -1042,6 +1181,7 @@
             </a>
           </article>
           <article class="flame-version">
+            <div class="flame-version-top"><span>FLAME</span><span class="flame-version-number">1.4</span></div>
             <h4>Следующий этап</h4><p>Промежуточный выпуск в развитии проекта между версиями 1.3 и 1.5.</p>
             <span class="flame-version-tag">АРХИВНАЯ ВЕРСИЯ</span>
             <a class="flame-download-button" href="https://github.com/komugi573-collab/komugi573-collab.github.io/raw/refs/heads/main/downloads/flame-v1.4.apk" download="flame-v1.4.apk" aria-label="Скачать FLAME 1.4 APK">
@@ -1229,28 +1369,8 @@
     applyTheme(savedTheme);
     themeToggle.addEventListener('click', () => applyTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark', true));
 
-    // Decorative, lightweight falling feathers and sparks.
-    const ambient = document.getElementById('ambientBg');
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      for (let i = 0; i < 24; i++) {
-        const particle = document.createElement('span');
-        particle.className = 'ambient-particle ' + (i % 3 === 0 ? 'dot' : 'feather');
-        if (i % 3 !== 0) particle.textContent = i % 2 ? '✦' : '✧';
-        particle.style.left = (Math.random() * 100) + '%';
-        particle.style.animationDuration = (13 + Math.random() * 15) + 's';
-        particle.style.animationDelay = (-Math.random() * 25) + 's';
-        particle.style.fontSize = (9 + Math.random() * 11) + 'px';
-        particle.style.setProperty('--drift', ((Math.random() * 90) - 45) + 'px');
-        ambient.appendChild(particle);
-      }
-    }
-
-    // Lightweight branded loading screen; the rest of the page stays usable after it fades.
-    const loadingScreen = document.getElementById('loadingScreen');
-    const hideLoader = () => window.setTimeout(() => loadingScreen.classList.add('loaded'), 700);
-    if (document.readyState === 'complete') hideLoader();
-    else window.addEventListener('load', hideLoader, { once:true });
-    window.setTimeout(() => loadingScreen.classList.add('loaded'), 1800);
+    // Ambient particles, glow, reveal animations and the scroll palette live in assets/refresh.js.
+    // The loading screen is handled by the inline script next to its markup.
 
     // Trailer audio is enabled by default. Visitors can still mute manually with the control.
     const trailer = document.getElementById('siteTrailer');
@@ -1268,21 +1388,40 @@
       showToast(trailer.muted ? 'Звук трейлера выключен' : 'Звук трейлера включён');
     });
     trailer.addEventListener('volumechange', syncSoundButton);
-    // Compatibility fallback: try the other common location if the first video path is missing.
-    const trailerSource = trailer.querySelector('source');
-    let trailerPathFallbackUsed = false;
-    trailer.addEventListener('error', () => {
-      if (!trailerPathFallbackUsed && trailerSource) {
-        trailerPathFallbackUsed = true;
-        const currentSource = trailerSource.getAttribute('src') || '';
-        trailerSource.src = currentSource.startsWith('assets/')
-          ? 'chicken_archer_trailer.mp4'
-          : 'assets/chicken_archer_trailer.mp4';
-        trailer.load();
-        return;
-      }
-      showToast('Не удалось загрузить трейлер. Проверьте, что chicken_archer_trailer.mp4 загружен рядом с index.html или в assets/.');
+    // Media loading: a failed trailer file or poster must never leave an empty black box.
+    // <source> errors do not bubble, so they are caught in the capture phase on the <video> itself.
+    document.querySelectorAll('video').forEach(video => {
+      const frame = video.parentElement;
+      const file = (video.querySelector('source') || video).getAttribute('src') || video.getAttribute('src') || '';
+      let note = null;
+      const showFailure = () => {
+        if (note || !frame) return;
+        frame.classList.add('media-failed');
+        note = document.createElement('div');
+        note.className = 'media-fallback'; note.setAttribute('role', 'status');
+        const title = document.createElement('strong'); title.textContent = 'Видео сейчас недоступно';
+        const text = document.createElement('span'); text.textContent = 'Не удалось загрузить трейлер. Проверьте соединение и попробуйте ещё раз.';
+        const actions = document.createElement('div'); actions.className = 'media-fallback-actions';
+        const retry = document.createElement('button'); retry.type = 'button'; retry.textContent = 'Повторить';
+        retry.addEventListener('click', () => { note.remove(); note = null; frame.classList.remove('media-failed'); video.load(); });
+        const link = document.createElement('a'); link.href = file; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = 'Открыть файл';
+        actions.append(retry, link); note.append(title, text, actions); frame.append(note);
+      };
+      video.addEventListener('error', showFailure, true);
+      video.addEventListener('loadeddata', () => { if (note) { note.remove(); note = null; frame.classList.remove('media-failed'); } });
+      // The poster is not reported by the video element: probe it separately and fall back to a themed backdrop.
+      const poster = video.getAttribute('poster');
+      if (poster) { const probe = new Image(); probe.onerror = () => frame && frame.classList.add('poster-missing'); probe.src = poster; }
     });
+    // Load the FLAME trailer metadata shortly before it scrolls into view instead of on page load.
+    const lazyVideo = document.querySelector('video[data-lazy-video]');
+    if (lazyVideo) {
+      const upgrade = () => { if (lazyVideo.preload === 'none') lazyVideo.preload = 'metadata'; };
+      if ('IntersectionObserver' in window) {
+        const lazyObserver = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) { upgrade(); lazyObserver.disconnect(); } }, { rootMargin: '700px 0px' });
+        lazyObserver.observe(lazyVideo);
+      } else upgrade();
+    }
 
     // Random tips, project facts and easter-egg-like notes.
     const tips = [
@@ -1315,7 +1454,6 @@
 
     // Animated mascot that reacts with short, pre-written phrases.
     const mascotButton = document.getElementById('mascotButton');
-    const mascotBubble = document.getElementById('mascotBubble');
     const mascotLines = [
       { face:'😎', mood:'proud', text:'Эй, лучник! Загляни в трейлер — там вся атмосфера игры.' },
       { face:'💛', mood:'happy', text:'Спасибо, что поддерживаешь Chicken Archer и FLAME!' },
@@ -1362,21 +1500,10 @@
     let lastRareMascotLine = -1;
 
     const triggerMascotReaction = (line, isRare = false, showNotice = true) => {
-      if (!mascotButton || !mascotBubble || !line) return;
-      mascotButton.textContent = line.face;
-      mascotButton.classList.remove('mood-happy','mood-excited','mood-curious','mood-confused','mood-sleepy','mood-proud','mood-playful','mood-surprised','mood-focused');
-      if (line.mood) mascotButton.classList.add('mood-' + line.mood);
-      mascotBubble.textContent = line.text;
-      mascotBubble.classList.add('show');
-      mascotBubble.classList.toggle('rare', isRare);
-      mascotButton.classList.remove('bounce');
-      void mascotButton.offsetWidth;
-      mascotButton.classList.add('bounce');
-      if (showNotice) showToast(isRare ? 'Редкая реакция маскота!' : 'Маскот Chicken Archer реагирует!');
-      window.clearTimeout(mascotButton._hideBubbleTimer);
-      mascotButton._hideBubbleTimer = window.setTimeout(() => {
-        mascotBubble.classList.remove('show', 'rare');
-      }, isRare ? 6500 : 5500);
+      if (!line) return;
+      // The animated SVG character (assets/mascot.js) maps the mood to one of ten emotions and shows the bubble.
+      if (window.ChickenMascot) window.ChickenMascot.react(line, isRare);
+      if (showNotice && isRare) showToast('Редкая реакция маскота!');
     };
 
     mascotButton.addEventListener('click', () => {
@@ -1398,7 +1525,7 @@
     document.querySelectorAll('.behind-card').forEach((card) => {
       card.addEventListener('toggle', () => {
         if (card.open && Math.random() < 0.22) {
-          triggerMascotReaction({face:'📖', text:'О, ты заглянул за кулисы! Там как раз собраны истории разработки.'}, false, false);
+          triggerMascotReaction({face:'📖', mood:'curious', text:'О, ты заглянул за кулисы! Там как раз собраны истории разработки.'}, false, false);
         }
       });
     });
