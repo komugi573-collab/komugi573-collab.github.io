@@ -49,7 +49,9 @@
     flap(ms = 900) { if (!reduce.matches) this.cls('flap', ms); }
     shake() { if (!reduce.matches) this.pulse('shake', 480); }
     lookAt(x, y) {
-      this.look.x = clamp(x, -1, 1); this.look.y = clamp(y, -1, 1);
+      x = clamp(x, -1, 1); y = clamp(y, -1, 1);
+      if (Math.abs(x - this.look.x) < .02 && Math.abs(y - this.look.y) < .02) return;   // nothing to update: avoids restyling the SVG on every scroll/pointer event
+      this.look.x = x; this.look.y = y;
       const st = this.svg.style;
       st.setProperty('--lx', (this.look.x * 4.2).toFixed(2)); st.setProperty('--ly', (this.look.y * 3.6).toFixed(2));
       st.setProperty('--hx', (this.look.x * 3.2).toFixed(2)); st.setProperty('--ht', (this.look.x * 2.4).toFixed(2));
@@ -177,14 +179,15 @@
     }, { passive: true });
 
     // scroll: show/hide, glance up/down, surprise at fast scrolling
-    let lastY = scrollY, lastT = performance.now(), calmTimer = 0, lastShock = 0;
+    let lastY = scrollY, lastT = performance.now(), calmTimer = 0, lastShock = 0, dir = 0;
     const onScroll = () => {
       wake();
       const y = scrollY, now = performance.now(), v = Math.abs(y - lastY) / Math.max(1, now - lastT);
       if (y > 220) show(); else if (y < 70) hide();
       if (state.shown && Math.abs(y - lastY) > 3) {
-        site.lookAt(site.look.x * .4, y > lastY ? .9 : -.9);
-        clearTimeout(calmTimer); calmTimer = setTimeout(() => site.lookAt(0, 0), 900);
+        const d = y > lastY ? 1 : -1;
+        if (d !== dir) { dir = d; site.lookAt(site.look.x * .4, d * .9); }
+        clearTimeout(calmTimer); calmTimer = setTimeout(() => { dir = 0; site.lookAt(0, 0); }, 900);
         if (v > 3.2 && now - lastShock > 6000) { lastShock = now; site.set('surprised', 1100); site.flap(700); }
       }
       lastY = y; lastT = now;

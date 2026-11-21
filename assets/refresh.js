@@ -118,6 +118,13 @@
   });
 
   /* --------------------------------------------------------------- 4. reveal */
+  /* sections currently near the viewport are flagged; the rest have their decorative animations paused (see refresh.css) */
+  safe('visibility', () => {
+    if (!('IntersectionObserver' in window)) { doc.querySelectorAll('main > section').forEach(s => s.classList.add('in-view')); return; }
+    const io = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('in-view', e.isIntersecting)), { rootMargin: '120px 0px' });
+    doc.querySelectorAll('main > section').forEach(s => io.observe(s));
+  });
+
   safe('reveal', () => {
     const groups = [
       ['.section-head', null], ['.history-note', null], ['.flame-history-head', null], ['.faq-project-head', null],

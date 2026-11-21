@@ -34,7 +34,7 @@
       var d = document.documentElement; d.classList.add('js');
       try { if (sessionStorage.getItem('ca-loader-seen') === '1') d.classList.add('loader-skip'); } catch (e) {}
       try { if (localStorage.getItem('chicken-archer-theme') === 'light') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f3ec'); } catch (e) {}
-      setTimeout(function () { d.classList.add('is-ready', 'reveal-all'); }, 5500);
+      setTimeout(function () { d.classList.add('is-ready', 'reveal-all', 'loader-skip'); }, 5500);   // last resort if scripts never ran: also drop the loader
     })();
   </script>
   <style>
@@ -729,6 +729,8 @@
   <link rel="stylesheet" href="assets/refresh.css">
   <script src="assets/refresh.js" defer></script>
   <script src="assets/mascot.js" defer></script>
+  <link rel="stylesheet" href="assets/mobile.css" media="(max-width: 760px)">
+  <script src="assets/mobile.js" defer></script>
 </head>
 <body data-theme="dark" data-project="chicken">
   <div class="palette-backdrop" aria-hidden="true"></div>
@@ -853,7 +855,7 @@
       const labels = ['Разбираем страницу…', 'Подключаем оформление…', 'Оживляем интерфейс…', 'Готово!'];
       const bar = document.getElementById('ldBar'), status = document.getElementById('ldStatus');
       const t0 = performance.now();
-      let done = 0, finishing = false, minShow = reduce ? 150 : 750;
+      let done = 0, finishing = false, minShow = reduce ? 150 : 1150;
       const finish = () => {
         clearTimeout(blinkTimer);
         scr.classList.add('hit');
@@ -1313,6 +1315,15 @@
     </div>
   </footer>
 
+
+  <div class="sheet-scrim" id="sheetScrim" hidden></div>
+  <nav class="dock" id="dock" aria-label="Быстрая навигация">
+    <a href="#home" data-dock="home"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg><span>Главная</span></a>
+    <a href="#trailer" data-dock="trailer"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3.5"/><path d="M10.5 9.5v5l4.2-2.5z" fill="currentColor"/></svg><span>Трейлер</span></a>
+    <a href="#version" data-dock="version"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.2 5.6.7-4.1 3.9 1.1 5.6L12 15.6 7 18.4l1.1-5.6L4 8.9l5.6-.7z"/></svg><span>Версии</span></a>
+    <a href="#flame" data-dock="flame"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c.6 3.2-2.2 4.6-3.6 7.1C7 12.7 8 15 9.6 15.6c-.4-1.5.3-2.6 1.3-3.5.4 1.5 1.9 2 2.2 3.6 1.3-.7 2-2.1 1.7-3.8C16.6 13 17.8 15 17 17.2 16.3 19.3 14.3 21 12 21c-3.3 0-6-2.5-6-5.8C6 10.8 11.3 8.3 12 3z"/></svg><span>FLAME</span></a>
+    <button type="button" data-dock="menu" id="dockMenu" aria-controls="navLinks" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>Меню</span></button>
+  </nav>
 
   <div class="mascot-widget" aria-label="Маскот Chicken Archer">
     <div class="mascot-bubble" id="mascotBubble" role="status">Привет! Нажми на меня — покажу случайный факт.</div>
