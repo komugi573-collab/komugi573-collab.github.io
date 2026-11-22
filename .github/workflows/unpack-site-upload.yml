@@ -1,0 +1,39 @@
+name: Unpack site upload
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site-upload.zip"
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Extract uploaded site archive
+        run: |
+          test -f site-upload.zip
+          mkdir -p /tmp/site-upload
+          unzip -q site-upload.zip -d /tmp/site-upload
+          rsync -a /tmp/site-upload/ ./ --exclude='.git/' --exclude='.github/'
+          rm -f site-upload.zip
+
+      - name: Commit extracted site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No site changes to commit."
+            exit 0
+          fi
+          git commit -m "Deploy uploaded site archive"
+          git push
