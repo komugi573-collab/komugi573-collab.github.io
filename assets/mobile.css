@@ -22,7 +22,8 @@
   body[data-theme] .brand-name small { margin-top: 3px; font-size: .5rem; letter-spacing: .15em; }
   body[data-theme] .top-actions { margin-left: auto; gap: 8px; }
   body[data-theme] .theme-toggle,
-  body[data-theme] .menu-toggle { width: 42px; height: 42px; padding: 0; justify-content: center; align-items: center; border-radius: 14px; font-size: 1.05rem; }
+  body[data-theme] .menu-toggle,
+  body[data-theme] .ny-toggle { width: 42px; height: 42px; padding: 0; justify-content: center; align-items: center; border-radius: 14px; font-size: 1.05rem; }
 
   /* ---- bottom dock ---- */
   body[data-theme] .dock { display: grid; grid-template-columns: repeat(5, 1fr); position: fixed; z-index: 50; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); padding: 6px; border-radius: 26px; background: rgba(22, 17, 25, .96); border: 1px solid rgba(var(--ac-rgb), .24); box-shadow: 0 18px 40px -12px rgba(0, 0, 0, .75), 0 0 38px -14px rgba(var(--ac-rgb), .55), inset 0 1px rgba(255, 255, 255, .07); }
@@ -50,14 +51,7 @@
   body[data-theme] .nav-links > a:active { transform: scale(.97); }
   body[data-theme] .nav-links > a.project-tab { justify-content: center; min-height: 52px; font-size: .74rem; letter-spacing: .1em; }
   body[data-theme] .nav-links > a.nav-cta { grid-column: 1 / -1; justify-content: center; min-height: 56px; margin-top: 4px; font-size: 1rem; color: #26150e; border-color: transparent; background: linear-gradient(130deg, var(--site-accent), var(--site-secondary)); box-shadow: 0 12px 30px -10px var(--glow-a); }
-  body[data-theme] .nav-links > a[href]:not(.project-tab):not(.nav-cta)::before { font-size: 1.25rem; width: 28px; text-align: center; }
-  body[data-theme] .nav-links > a[href="#about"]::before { content: "🎯"; }
-  body[data-theme] .nav-links > a[href="#trailer"]::before { content: "🎬"; }
-  body[data-theme] .nav-links > a[href="#version"]::before { content: "⭐"; }
-  body[data-theme] .nav-links > a[href="#history"]::before { content: "📜"; }
-  body[data-theme] .nav-links > a[href="#behind-scenes"]::before { content: "🎭"; }
-  body[data-theme] .nav-links > a[href="#socials"]::before { content: "🔗"; }
-  body[data-theme] .nav-links > a[href="#support-bot"]::before { content: "🤖"; }
+  body[data-theme] .nav-links > a .nav-ico { display: block; flex: none; width: 24px; height: 24px; stroke-width: 1.7; color: var(--site-accent); }
 
   /* ---- hero ---- */
   body[data-theme] .hero { display: flex; flex-direction: column; gap: 22px; min-height: 0; padding: 22px 0 34px; text-align: center; align-items: center; }

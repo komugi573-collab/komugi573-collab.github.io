@@ -154,6 +154,8 @@
   });
 
   /* -------------------------------------------------------------- 2. particles */
+  // small public API used by the seasonal layer (assets/newyear.js); harmless no-op when particles are off
+  window.CAFx = { setSnow() {}, snowing: false };
   safe('particles', () => {
     if (reduceMq.matches) return;
     const host = doc.getElementById('ambientBg'); if (!host) return;
@@ -193,6 +195,29 @@
     };
     for (let i = 0; i < max; i++) parts.push(spawn(true));
     const bursts = [];
+    /* seasonal snow: its own layer, drawn on top of the zone particles. It melts away while the visitor is
+       inside the FLAME zone and returns when they leave it; thins out together with the other particles. */
+    const max0 = max, snowBase = (innerWidth < 700 || coarse) ? 34 : 80;
+    let snowOn = false, snowLv = 0, snow = [];
+    const flake = (top) => ({ x: R() * W, y: top ? -10 - R() * 40 : R() * H, r: .9 + R() * 2.3, vy: .35 + R() * .85, vx: (R() - .5) * .25, tw: R() * 6.3, sw: .4 + R() * .9 });
+    const drawSnow = (k, lt) => {
+      const want = snowOn && state.zone !== 'flame' ? 1 : 0;
+      snowLv = lerp(snowLv, want, .025 * k);
+      if (snowLv < .012) { if (!want) snow.length = 0; return; }
+      const n = Math.round(snowBase * Math.min(1, max / max0));
+      while (snow.length < n) snow.push(flake(false));
+      if (snow.length > n) snow.length = n;
+      ctx.fillStyle = lt ? 'rgba(120,160,205,' : 'rgba(255,255,255,';
+      for (let i = 0; i < snow.length; i++) {
+        const f = snow[i];
+        f.tw += .018 * k; f.y += f.vy * k * (.6 + f.r * .25); f.x += (f.vx + Math.sin(f.tw) * f.sw * .35) * k;
+        if (f.y > H + 12 || f.x < -14 || f.x > W + 14) { snow[i] = flake(true); continue; }
+        const a = (.35 + f.r * .16) * snowLv * (lt ? .85 : 1);
+        ctx.fillStyle = (lt ? 'rgba(120,160,205,' : 'rgba(255,255,255,') + a.toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.283); ctx.fill();
+      }
+    };
+    window.CAFx.setSnow = on => { snowOn = !!on; window.CAFx.snowing = snowOn; if (snowOn && !raf && !doc.hidden) { last = 0; raf = requestAnimationFrame(loop); } };
     const burst = (x, y) => {
       const n = coarse ? 9 : 15;
       for (let i = 0; i < n; i++) {
@@ -277,6 +302,7 @@
         ctx.fillStyle = rgb(state.ac2, b.life * .22); ctx.beginPath(); ctx.arc(b.x, b.y, b.r * 4, 0, 6.283); ctx.fill();
       }
       ctx.globalCompositeOperation = 'source-over';
+      drawSnow(k, lt);
       raf = requestAnimationFrame(loop);
     };
     doc.addEventListener('visibilitychange', () => { if (!doc.hidden && !raf) { last = 0; raf = requestAnimationFrame(loop); } });

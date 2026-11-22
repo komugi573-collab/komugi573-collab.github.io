@@ -1,0 +1,130 @@
+/* Chicken Archer & FLAME — New Year layer.
+   Loaded only while the season is active (see the head script in index.html) and drawn only under html.ny.
+   Everything is transform/opacity, pointer-events:none and aria-hidden. Snow itself is a canvas layer (refresh.js). */
+
+html.ny {
+  --ny-red: #e0414d; --ny-red-d: #b82a38; --ny-pine: #1f8a58; --ny-pine-d: #14603c; --ny-gold: #ffd36b; --ny-ice: #cfeaff;
+}
+
+/* ------------------------------------------------------------ cold atmosphere */
+.ny-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 1.4s ease; background:
+  radial-gradient(70% 45% at 12% -4%, rgba(160, 205, 255, .13), transparent 70%),
+  radial-gradient(60% 40% at 96% 8%, rgba(255, 120, 130, .08), transparent 70%),
+  radial-gradient(70% 38% at 50% 108%, rgba(70, 200, 140, .09), transparent 70%); }
+html.ny .ny-bg { opacity: 1; }
+html.ny body[data-theme="light"] .ny-bg { background:
+  radial-gradient(70% 45% at 12% -4%, rgba(120, 170, 230, .16), transparent 70%),
+  radial-gradient(60% 40% at 96% 8%, rgba(230, 90, 100, .09), transparent 70%),
+  radial-gradient(70% 38% at 50% 108%, rgba(60, 170, 120, .10), transparent 70%); }
+html.ny body[data-zone="flame"] .ny-bg { opacity: .18; }
+
+/* ------------------------------------------------------------------- garland */
+.ny-garland { position: absolute; left: 0; right: 0; top: 100%; height: 40px; pointer-events: none; z-index: 4; overflow: hidden; opacity: 0; transform: translateY(-14px); transition: opacity .8s ease, transform .9s cubic-bezier(.2, .9, .25, 1);
+  --b1: #ff5b66; --b2: #ffd36b; --b3: #5ad6a0; --b4: #6cb8ff; --tile: 120px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='20' viewBox='0 0 120 20'%3E%3Cpath d='M0 1Q60 24 120 1' fill='none' stroke='%2349a070' stroke-width='2.200'/%3E%3C/svg%3E") repeat-x 0 0 / var(--tile) 20px; }
+html.ny .ny-garland { opacity: 1; transform: none; }
+body[data-zone="flame"] .ny-garland { --b1: #ff6a2b; --b2: #ffb347; --b3: #ff4d3a; --b4: #ffd36b; }
+body[data-theme="light"] .ny-garland { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='20' viewBox='0 0 120 20'%3E%3Cpath d='M0 1Q60 24 120 1' fill='none' stroke='%232f8a5c' stroke-width='2.200'/%3E%3C/svg%3E"); }
+.ny-bulb { position: absolute; top: 11px; width: 11px; height: 16px; margin-left: -5.500px; transform-origin: 50% 0; }
+.ny-bulb::before { content: ""; position: absolute; left: 3px; top: -3px; width: 5px; height: 5px; border-radius: 1px; background: #3a5a49; }
+.ny-bulb i { position: absolute; inset: 2px 0 0; border-radius: 50% 50% 55% 55%; background: var(--c, var(--b1)); transition: background .9s ease; box-shadow: inset -2px -2px 0 rgba(0, 0, 0, .14), inset 2px 2px 0 rgba(255, 255, 255, .35); }
+.ny-bulb i::after { content: ""; position: absolute; left: -9px; top: -7px; width: 29px; height: 29px; border-radius: 50%; background: radial-gradient(closest-side, var(--c, var(--b1)), transparent); opacity: .5; animation: nyTwinkle 2.8s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.ny-bulb:nth-child(4n+1) { --c: var(--b1); } .ny-bulb:nth-child(4n+2) { --c: var(--b2); } .ny-bulb:nth-child(4n+3) { --c: var(--b3); } .ny-bulb:nth-child(4n) { --c: var(--b4); }
+@keyframes nyTwinkle { 0%, 100% { opacity: .18; } 50% { opacity: .75; } }
+
+/* ---------------------------------------------------------------- trees */
+.ny-tree { position: absolute; pointer-events: none; z-index: 2; opacity: 0; transform: translateY(14px) scale(.94); transform-origin: 50% 100%; transition: opacity .9s ease .2s, transform 1s cubic-bezier(.2, .9, .25, 1) .2s; }
+html.ny .ny-tree { opacity: 1; transform: none; }
+.ny-tree svg { display: block; width: 100%; height: auto; overflow: visible; }
+.ny-tree .tl { animation: nyTwinkle 2.4s ease-in-out infinite; }
+.ny-tree .tl:nth-child(2n) { animation-delay: -.8s; } .ny-tree .tl:nth-child(3n) { animation-delay: -1.5s; }
+.ny-tree .tstar { transform-origin: 50% 50%; transform-box: fill-box; }
+.ny-tree-hero { right: 3.5%; bottom: 3.5%; width: 19%; z-index: 3; }
+.ny-tree-support { right: clamp(16px, 2vw, 34px); bottom: 0; width: clamp(70px, 7vw, 96px); }
+html.ny .support { padding-right: clamp(110px, 11vw, 160px); }
+
+/* ------------------------------------------------------------- snow caps */
+.ny-rel { position: relative; }
+.ny-cap { position: absolute; left: 10px; right: 10px; top: 0; height: 13px; pointer-events: none; z-index: 3; border-radius: 0 0 14px 14px; opacity: 0; transform: translateY(-5px); transition: opacity .7s ease, transform .8s cubic-bezier(.2, .9, .25, 1);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='13' viewBox='0 0 72 13'%3E%3Cpath d='M0 0H72V4C66 4 66 11 58 11 52 11 52 6 46 6 40 6 38 12 30 12 22 12 22 5 16 5 9 5 8 10 0 9Z' fill='%23fbfdff'/%3E%3Cpath d='M0 9C8 10 9 5 16 5 22 5 22 12 30 12 38 12 40 6 46 6 52 6 52 11 58 11 66 11 66 4 72 4' fill='none' stroke='%23b9d4ee' stroke-width='1.600'/%3E%3C/svg%3E") repeat-x 0 0 / 72px 13px;
+  filter: drop-shadow(0 2px 2px rgba(0, 20, 50, .22)); }
+html.ny .ny-cap { opacity: 1; transform: none; }
+body[data-theme="light"] .ny-cap { filter: drop-shadow(0 2px 2px rgba(40, 80, 130, .28)); }
+/* compact accordions get a slimmer drift */
+.acc > summary > .ny-cap { height: 9px; background-size: 54px 9px; }
+/* FLAME cards do not get snow: a thin glowing seam instead (the snow "melts" at the project border) */
+.flame-section .ny-cap, .flame-section ~ section .ny-cap + .none { background: none; }
+.flame-section .ny-cap { height: 2px; left: 18px; right: 18px; border-radius: 2px; background: linear-gradient(90deg, transparent, #ffd58a, #ff7a33, #ffd58a, transparent); filter: none; box-shadow: 0 0 14px 1px rgba(255, 140, 60, .55); }
+
+/* ------------------------------------------------ section baubles (hanging) */
+.ny-bauble { position: absolute; top: -4px; right: clamp(6px, 3vw, 40px); width: 34px; pointer-events: none; z-index: 1; opacity: 0; transition: opacity .8s ease .3s; --bc: var(--ny-red); --bc2: var(--ny-red-d); }
+html.ny .ny-bauble { opacity: 1; }
+.ny-bauble svg { display: block; width: 100%; height: auto; overflow: visible; transform-origin: 50% 0; animation: nySwing 5.2s ease-in-out infinite; }
+.ny-bauble.b2 { right: calc(clamp(6px, 3vw, 40px) + 42px); width: 26px; --bc: var(--ny-pine); --bc2: var(--ny-pine-d); }
+.ny-bauble.b2 svg { animation-duration: 6.4s; animation-delay: -2s; }
+.flame-section .ny-bauble { --bc: #ff8a3c; --bc2: #d84a1c; } .flame-section .ny-bauble.b2 { --bc: #ffcf68; --bc2: #e49a2c; }
+#faq .ny-bauble { --bc: #4f9be8; --bc2: #2a64b0; } #faq .ny-bauble.b2 { --bc: var(--ny-gold); --bc2: #e0a830; }
+@keyframes nySwing { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+
+/* --------------------------------------------- cards, buttons, small accents */
+html.ny .panel, html.ny .social-card { border-color: rgba(190, 225, 255, .2); }
+html.ny body[data-theme="light"] .panel, html.ny body[data-theme="light"] .social-card { border-color: rgba(70, 120, 175, .26); }
+html.ny .flame-section .panel { border-color: rgba(255, 150, 80, .26); }
+html.ny .button-primary { background: linear-gradient(135deg, #ff6670, #d93a46 62%, #b82a38); color: #fff; box-shadow: 0 14px 34px -12px rgba(224, 65, 77, .7), inset 0 1px rgba(255, 255, 255, .35); text-shadow: 0 1px 2px rgba(80, 10, 20, .4); }
+html.ny .button-primary:hover { box-shadow: 0 18px 40px -10px rgba(224, 65, 77, .85), inset 0 1px rgba(255, 255, 255, .4); }
+html.ny .nav-cta { background: linear-gradient(135deg, #ff6670, #d93a46); color: #fff; }
+html.ny .flame-button, html.ny .flame-download-button { filter: none; }
+html.ny .eyebrow .pulse-dot, html.ny .version-pill .pulse-dot { background: var(--ny-pine); box-shadow: 0 0 0 4px rgba(31, 138, 88, .22); }
+html.ny .history-rail li:nth-child(odd):not(.now) { border-color: rgba(224, 65, 77, .5); }
+html.ny .history-rail li:nth-child(even):not(.now) { border-color: rgba(31, 160, 100, .55); }
+html.ny .history-rail::before { background: repeating-linear-gradient(90deg, rgba(224, 65, 77, .6) 0 14px, rgba(31, 160, 100, .6) 14px 28px); -webkit-mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+html.ny .kicker { color: color-mix(in srgb, currentColor 70%, var(--ny-gold)); }
+
+/* ----------------------------------------------------------- ground + greeting */
+footer { position: relative; }
+.ny-ground { position: absolute; left: 0; right: 0; top: -17px; height: 18px; pointer-events: none; opacity: 0; transition: opacity .9s ease; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='18' viewBox='0 0 180 18'%3E%3Cpath d='M0 18V10C20 2 36 4 56 9 78 15 92 3 118 4 142 5 156 14 180 8V18Z' fill='%23e6f0fa'/%3E%3C/svg%3E") repeat-x 0 100% / 180px 18px; filter: drop-shadow(0 -2px 3px rgba(150, 195, 240, .25)); }
+html.ny .ny-ground { opacity: .95; }
+body[data-theme="light"] .ny-ground { filter: drop-shadow(0 -2px 3px rgba(70, 120, 175, .28)); }
+.ny-greet { display: none; margin: 14px 0 12px; font-size: .9rem; font-weight: 600; line-height: 1.5; color: var(--muted, inherit); }
+html.ny .ny-greet { display: block; }
+.ny-greet::before { content: ""; display: inline-block; width: 18px; height: 18px; margin: 0 8px -3px 0; background: linear-gradient(135deg, #ff6670, #1fa064); -webkit-mask: var(--ico-spark) center / contain no-repeat; mask: var(--ico-spark) center / contain no-repeat; }
+
+/* -------------------------------------------------------------- toggle + toast */
+.ny-toggle[aria-pressed="false"] { opacity: .6; }
+.ny-toggle[aria-pressed="true"] { color: #bfe6ff; border-color: rgba(160, 210, 255, .5); }
+body[data-theme="light"] .ny-toggle[aria-pressed="true"] { color: #2b6fb0; border-color: rgba(60, 120, 190, .5); }
+.ny-toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 90; width: min(92vw, 420px); padding: 14px 18px; border-radius: 18px; border: 1px solid rgba(190, 225, 255, .35); background: rgba(16, 28, 44, .94); color: #eaf5ff; font-size: .9rem; line-height: 1.5; box-shadow: 0 24px 60px -18px rgba(0, 0, 0, .6); opacity: 0; transform: translate(-50%, 16px); pointer-events: none; transition: opacity .5s ease, transform .6s cubic-bezier(.2, .9, .25, 1); }
+.ny-toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.ny-toast b { display: block; margin-bottom: 2px; color: #fff; }
+body[data-theme="light"] .ny-toast { background: rgba(255, 255, 255, .97); color: #1f3550; border-color: rgba(60, 120, 190, .35); }
+body[data-theme="light"] .ny-toast b { color: #12263c; }
+
+/* ---------------------------------------------------------------- responsive */
+@media (max-width: 760px) {
+  .ny-garland { height: 34px; --tile: 90px; }
+  .ny-bulb { width: 9px; height: 13px; margin-left: -4.500px; top: 8px; }
+  .ny-bulb i::after { left: -8px; top: -6px; width: 25px; height: 25px; }
+  .ny-bauble { width: 26px; right: 8px; } .ny-bauble.b2 { width: 20px; right: 42px; }
+  .ny-tree-hero { right: 4%; width: 21%; }
+  .ny-tree-support { display: none; }
+  html.ny .support { padding-right: clamp(25px, 4.500vw, 44px); }
+  .ny-toast { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (max-width: 380px) { .ny-bauble.b2 { display: none; } }
+
+/* ---------------------------------------------------------------- calm mode */
+@media (prefers-reduced-motion: reduce) {
+  .ny-bulb i::after, .ny-tree .tl, .ny-bauble svg { animation: none; }
+  .ny-garland, .ny-tree, .ny-cap, .ny-bauble, .ny-bg, .ny-ground, .ny-toast { transition: none; }
+}
+
+/* bauble parts (colours come from the section via --bc / --bc2) */
+.ny-bauble .bb { fill: var(--bc); } .ny-bauble .bb2 { fill: var(--bc2); }
+html.ny-lite .ny-bulb i::after, html.ny-lite .ny-tree .tl, html.ny-lite .ny-bauble svg { animation: none; }
+
+/* the extra snowflake button must not push the desktop menu out of the header on 1280-1420px screens */
+@media (min-width: 1280px) and (max-width: 1420px) {
+  html.ny-season .nav { gap: 10px; }
+  html.ny-season .top-actions { gap: 8px; }
+  html.ny-season .nav-links > a:not(.nav-cta):not(.project-tab) { padding: 8px 5px; }
+}

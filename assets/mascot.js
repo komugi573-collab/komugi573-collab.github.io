@@ -1,15 +1,20 @@
-/* Chicken Archer mascot — SVG character with ten emotions and a small state machine.
+/* Chicken Archer mascot — SVG character with eighteen emotions and a small state machine.
    Public API (used by the inline script of index.html):
      ChickenMascot.mount(el, {uid})      clone the character into an element (also used by the loading screen)
      ChickenMascot.react(line, rare)     line = { mood, text } from the site's phrase lists
-     ChickenMascot.say(text, emo, ms)    show a bubble with an emotion */
+     ChickenMascot.say(text, emo, ms)    show a bubble with an emotion
+     ChickenMascot.mountStage(el)        a second, larger character for the facts section (returns a Chicky)
+     ChickenMascot.labels / bits         Russian names of the emotions and the little icons that float out of them */
 (() => {
   'use strict';
   const doc = document;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   const R = Math.random, clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const pick = a => a[Math.floor(R() * a.length)];
-  const EMOS = ['calm', 'happy', 'surprised', 'curious', 'embarrassed', 'displeased', 'wink', 'delight', 'sleepy', 'sly'];
+  const EMOS = ['calm', 'happy', 'surprised', 'curious', 'embarrassed', 'displeased', 'wink', 'delight', 'sleepy', 'sly', 'love', 'laugh', 'thinking', 'proud', 'cool', 'dizzy', 'scared', 'aim'];
+  const LABELS = { calm: 'спокойствие', happy: 'радость', surprised: 'удивление', curious: 'любопытство', embarrassed: 'смущение', displeased: 'недовольство', wink: 'подмигивание', delight: 'восторг', sleepy: 'сонливость', sly: 'хитринка', love: 'влюблённость', laugh: 'смех', thinking: 'размышление', proud: 'гордость', cool: 'невозмутимость', dizzy: 'головокружение', scared: 'испуг', aim: 'прицел' };
+  // what floats out of the character while it feels something (icon ids from the sprite) and how long the mood is held
+  const BITS = { love: ['heart', 'heart', 'heart'], delight: ['sparkle', 'star', 'sparkle'], laugh: ['sparkle'], proud: ['star'], cool: ['sparkle'], happy: ['note'], wink: ['sparkle'], aim: ['target'], thinking: [], surprised: [] };
   // old phrase moods -> emotions
   const MOOD = { happy: 'happy', excited: 'delight', curious: 'curious', confused: 'embarrassed', sleepy: 'sleepy', proud: 'sly', playful: 'wink', surprised: 'surprised', focused: 'displeased' };
 
@@ -24,6 +29,14 @@
     const svg = host.querySelector('.chicky');
     if (svg) svg.classList.add('on');
     return svg;
+  };
+  // larger twin for the facts section: own state, no widget behaviour
+  const mountStage = host => {
+    const svg = mount(host);
+    if (!svg) return null;
+    const c = new Chicky(svg);
+    c.set('calm');
+    return c;
   };
 
   /* --------------------------------------------------- character controller */
@@ -55,6 +68,27 @@
       const st = this.svg.style;
       st.setProperty('--lx', (this.look.x * 4.2).toFixed(2)); st.setProperty('--ly', (this.look.y * 3.6).toFixed(2));
       st.setProperty('--hx', (this.look.x * 3.2).toFixed(2)); st.setProperty('--ht', (this.look.x * 2.4).toFixed(2));
+    }
+    // each emotion has its own signature movement
+    gesture(emo) {
+      if (reduce.matches) return;
+      switch (emo) {
+        case 'happy': this.wave(1500); break;
+        case 'delight': this.hop(); this.flap(1100); break;
+        case 'surprised': this.pulse('jump', 760); break;
+        case 'embarrassed': case 'displeased': this.shake(); break;
+        case 'wink': this.wave(1200, true); break;
+        case 'sly': case 'cool': this.pulse('nod', 740); break;
+        case 'curious': this.pulse('shake', 300); break;
+        case 'love': this.hop(); break;
+        case 'laugh': break;
+        case 'proud': this.pulse('puff', 740); break;
+        case 'dizzy': this.pulse('flip', 740); break;
+        case 'scared': this.pulse('jump', 760); break;
+        case 'aim': this.pulse('recoil', 540); break;
+        case 'thinking': break;
+        default: break;
+      }
     }
     blinkLoop() {
       const go = () => {
@@ -229,6 +263,6 @@
     if (!reduce.matches) setInterval(idleTick, 6500);
   };
 
-  window.ChickenMascot = { mount, react, say, Chicky, emotions: EMOS };
+  window.ChickenMascot = { mount, mountStage, react, say, Chicky, emotions: EMOS, labels: LABELS, bits: BITS };
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init); else init();
 })();
