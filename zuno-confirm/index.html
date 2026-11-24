@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111018">
+<title>Zuno — подтверждение почты</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 0%,#30204f 0,#171321 42%,#0d0c12 100%);font:16px system-ui,-apple-system,sans-serif;color:#f5f1ff}
+.card{width:min(100%,440px);padding:34px 28px;border:1px solid #ffffff18;border-radius:26px;background:#191622ef;box-shadow:0 24px 80px #0008;text-align:center}
+.logo{font-size:34px;font-weight:800;letter-spacing:-1.8px;background:linear-gradient(90deg,#fff,#b99aff);color:transparent;background-clip:text}
+.icon{width:76px;height:76px;margin:24px auto 18px;border-radius:24px;display:grid;place-items:center;background:#8b5cf622;border:1px solid #a78bfa66;font-size:34px}
+.muted{color:#b9b1c9;line-height:1.6}.status{font-size:21px;font-weight:700;margin:0 0 10px}
+.hint{margin-top:24px;padding:14px;border-radius:14px;background:#ffffff0a;color:#c9c1d8;line-height:1.5;font-size:14px}
+.error{color:#ffb4b4}.ok{color:#c5a8ff}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="logo">zuno</div>
+  <div class="icon" id="icon">✉</div>
+  <h1 class="status" id="title">Проверяем подтверждение…</h1>
+  <p class="muted" id="message">Подождите немного.</p>
+  <div class="hint">После подтверждения вернитесь в приложение Zuno и войдите под своей почтой и паролем.</div>
+</main>
+<script>
+(() => {
+  const hash = new URLSearchParams(location.hash.slice(1));
+  const query = new URLSearchParams(location.search);
+  const error = hash.get("error_description") || query.get("error_description") || hash.get("error") || query.get("error");
+  const type = hash.get("type") || query.get("type");
+  const token = hash.get("access_token");
+  const title = document.getElementById("title");
+  const message = document.getElementById("message");
+  const icon = document.getElementById("icon");
+
+  if (error) {
+    title.textContent = "Не удалось подтвердить почту";
+    title.className = "status error";
+    message.textContent = error;
+    icon.textContent = "!";
+  } else if (token || type === "signup" || type === "email") {
+    title.textContent = "Почта подтверждена!";
+    title.className = "status ok";
+    message.textContent = "Аккаунт Zuno активирован. Теперь можно вернуться в приложение и войти.";
+    icon.textContent = "✓";
+  } else {
+    title.textContent = "Подтверждение завершено";
+    title.className = "status ok";
+    message.textContent = "Вернитесь в Zuno и войдите под своей почтой и паролем. Если подтверждение не прошло, откройте ссылку из письма повторно.";
+    icon.textContent = "✓";
+  }
+})();
+</script>
+</body>
+</html>
